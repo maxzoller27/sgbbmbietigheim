@@ -77,10 +77,16 @@
             }
             .nav-menu.active { transform: translateY(0); }
             .mobile-menu-toggle { display: block; }
-            .mega-menu { position: static; transform: none; width: 100%; box-shadow: none; display: block; padding: 20px; border: none; }
+            
+            /* Mobiles Team-Menü standardmäßig ausblenden */
+            .mega-menu { position: static; transform: none; width: 100%; box-shadow: none; display: none; padding: 20px; border: none; }
+            .mega-menu.mobile-open { display: block; }
+            
             .mega-container { grid-template-columns: 1fr; gap: 20px; }
             .nav-item-teams { flex-direction: column; height: auto; align-items: flex-start; width: 100%; }
-            .nav-link { font-size: 18px; font-weight: 600; padding: 15px 22px; width: 100%; }
+            .nav-link { font-size: 18px; font-weight: 600; padding: 15px 22px; width: 100%; border-bottom: 1px solid #f5f5f7; }
+            .team-toggle-icon { margin-left: 10px; transition: transform 0.3s; }
+            .team-toggle-icon.rotated { transform: rotate(180deg); }
         }
 
         /* --- SECTIONS --- */
@@ -118,8 +124,8 @@
         <ul class="nav-menu" id="main-nav-menu">
             <li><span class="nav-link" onclick="closeAndShow('home')">Home</span></li>
             <li class="nav-item-teams">
-                <span class="nav-link">Teams</span>
-                <div class="mega-menu">
+                <span class="nav-link" onclick="toggleTeamsDropdown(event)">Teams <i class="fa-solid fa-chevron-down team-toggle-icon" id="team-chevron"></i></span>
+                <div class="mega-menu" id="teams-mega-menu">
                     <div class="mega-container">
                         <div class="mega-col">
                             <h4>Jugend Männlich</h4>
@@ -174,7 +180,8 @@
     <div id="page-about" class="section">
         <div class="content-card">
             <h2>Über uns</h2>
-            <p style="font-size: 18px; line-height: 1.6;">Die SG BBM Bietigheim steht für Leidenschaft, Teamgeist und Spitzenhandball in der Region. Als starke Gemeinschaft fördern wir Talente von klein auf und leben den Sport jeden Tag.</p>
+            <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px;">Die SG BBM Bietigheim steht für Leidenschaft, Teamgeist und Spitzenhandball in der Region. Als starke Gemeinschaft aus Bietigheim, Bissingen und Metterzimmern fördern wir Talente von den kleinsten Minis bis hin zu unseren erfolgreichen Aktiven-Mannschaften.</p>
+            <p style="font-size: 18px; line-height: 1.6;">Unsere Mission ist es, die Faszination des Handballsports jeden Tag erlebbar zu machen – sowohl durch sportliche Exzellenz auf dem Feld als auch durch ein starkes Miteinander abseits des Spielfelds.</p>
         </div>
     </div>
 
@@ -213,15 +220,31 @@
         menu.classList.toggle('active');
         icon.classList.toggle('fa-bars');
         icon.classList.toggle('fa-xmark');
+        
+        // Reset Teams Dropdown bei Schließen
+        if(!menu.classList.contains('active')) {
+            document.getElementById('teams-mega-menu').classList.remove('mobile-open');
+            document.getElementById('team-chevron').classList.remove('rotated');
+        }
+    }
+
+    function toggleTeamsDropdown(event) {
+        if(window.innerWidth <= 768) {
+            event.stopPropagation();
+            const mega = document.getElementById('teams-mega-menu');
+            const chevron = document.getElementById('team-chevron');
+            mega.classList.toggle('mobile-open');
+            chevron.classList.toggle('rotated');
+        }
     }
 
     function closeAndShow(pageId) {
-        if(window.innerWidth <= 768 && document.getElementById('main-nav-menu').classList.contains('active')) toggleMobileMenu();
+        if(window.innerWidth <= 768) toggleMobileMenu();
         showPage(pageId);
     }
 
     function closeAndShowTeam(kat, name) {
-        if(window.innerWidth <= 768 && document.getElementById('main-nav-menu').classList.contains('active')) toggleMobileMenu();
+        if(window.innerWidth <= 768) toggleMobileMenu();
         showTeam(kat, name);
     }
 
@@ -235,7 +258,6 @@
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         let title = (kat === 'Herren' || kat === 'Frauen') ? kat + " " + name : kat + " " + name + "-Jugend";
         
-        // BILDLOGIK
         let teamImgPath = "";
         if(kat === 'männlich' && name === 'A') {
             teamImgPath = "ajugendteamfoto.jpg";
@@ -260,7 +282,6 @@
             icon.style.display = 'block';
         };
 
-        // TABELLENLOGIK
         const container = document.getElementById('handball-tabelle');
         container.innerHTML = "";
         if (kat === 'männlich' && name === 'A') {
