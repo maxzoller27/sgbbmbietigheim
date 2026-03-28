@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SG BBM Bietigheim | Offizielle Webseite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>SG BBM GbR | Offizielle Webseite - Handball Leidenschaft</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary-red: #e30613;
-            --primary-blue: #0054a6; /* Das klassische SGBBM Blau */
+            --primary-red: #e30613; /* Das nuLiga Rot */
+            --primary-blue: #0054a6; /* Das SGBBM Blau für Akzente */
             --bg-light: #f8f9fa;
-            --glass-white: rgba(255, 255, 255, 0.7);
+            --glass-white: rgba(255, 255, 255, 0.85);
+            --glass-light: rgba(248, 249, 250, 0.9); /* Für Header/Footer */
             --text-dark: #1d1d1f;
             --text-muted: #6e6e73;
+            --border-light: rgba(0,0,0,0.06);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
@@ -25,7 +27,11 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden; /* Verhindert horizontales Scrollen der ganzen Seite */
         }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
 
         /* --- NAVIGATION --- */
         nav {
@@ -33,10 +39,10 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: var(--glass-white);
+            background: var(--glass-light);
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(0, 84, 166, 0.1);
-            padding: 10px 0;
+            border-bottom: 2px solid var(--primary-red); /* Rote Linie */
+            padding: 12px 0;
         }
 
         .nav-container {
@@ -50,12 +56,13 @@
 
         .logo-text {
             font-weight: 900;
-            font-size: 1.4rem;
-            color: var(--primary-blue);
+            font-size: 1.5rem;
+            color: var(--primary-red); /* Rot */
             text-transform: uppercase;
+            letter-spacing: -1px;
         }
 
-        .nav-menu { display: flex; list-style: none; gap: 25px; }
+        .nav-menu { display: flex; gap: 15px; }
         .nav-item { position: relative; }
 
         .nav-link {
@@ -64,12 +71,14 @@
             font-weight: 700;
             color: var(--text-dark);
             cursor: pointer;
-            padding: 10px 15px;
+            padding: 10px 18px;
             border-radius: 8px;
-            transition: var(--transition);
         }
 
-        .nav-link:hover { background: rgba(0, 84, 166, 0.05); color: var(--primary-blue); }
+        .nav-link:hover, .has-dropdown:hover > .nav-link {
+            background: rgba(227, 6, 19, 0.08); /* Hellroter Hover */
+            color: var(--primary-red);
+        }
 
         /* Dropdowns */
         .dropdown {
@@ -77,53 +86,63 @@
             top: 100%;
             left: 0;
             background: white;
-            min-width: 240px;
+            min-width: 260px;
             border-radius: 12px;
             padding: 15px;
             display: none;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .sub-dropdown-menu {
-            padding-left: 15px;
-            margin-bottom: 10px;
-            border-left: 2px solid var(--primary-blue);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+            border: 1px solid var(--border-light);
         }
 
         .nav-item:hover > .dropdown { display: block; animation: fadeIn 0.2s ease; }
 
+        .dropdown-section-title {
+            color: var(--primary-red);
+            font-weight: 900;
+            font-size: 0.7rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-dropdown-menu {
+            padding-left: 10px;
+            margin-bottom: 12px;
+            border-left: 2px solid rgba(227, 6, 19, 0.2);
+        }
+
         .dropdown a {
             display: block;
-            padding: 8px 10px;
+            padding: 8px 12px;
             color: var(--text-muted);
             font-size: 0.85rem;
-            text-decoration: none;
             border-radius: 6px;
         }
 
-        .dropdown a:hover { background: var(--bg-light); color: var(--primary-red); }
+        .dropdown a:hover {
+            background: var(--bg-light);
+            color: var(--primary-blue); /* Blau für Fein-Hover */
+        }
 
         /* --- HERO / LOGO BEREICH --- */
         .hero {
-            padding: 140px 20px 60px;
+            padding: 160px 20px 80px;
             text-align: center;
-            background: radial-gradient(circle at top, rgba(0,84,166,0.05) 0%, transparent 70%);
+            background: radial-gradient(circle at top, rgba(227,6,19,0.06) 0%, transparent 70%);
         }
 
         .main-logo-container {
-            width: 220px;
-            height: 220px;
+            width: 200px;
+            height: 200px;
             background: white;
-            margin: 0 auto 30px;
+            margin: 0 auto 35px;
             border-radius: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,84,166,0.1);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+            border: 2px solid var(--primary-red); /* Roter Rahmen */
             position: relative;
-            overflow: hidden;
         }
 
         .main-logo-container img {
@@ -133,59 +152,67 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(3rem, 7vw, 5rem);
             font-weight: 900;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
+            color: var(--primary-red); /* Rot */
+            margin-bottom: 15px;
             letter-spacing: -2px;
+            line-height: 0.9;
         }
 
-        /* --- GLAS-BUTTONS --- */
+        /* Glas-Buttons */
         .btn-glass {
-            background: rgba(0, 84, 166, 0.1);
+            background: rgba(227, 6, 19, 0.1);
             backdrop-filter: blur(10px);
-            color: var(--primary-blue);
-            padding: 14px 35px;
+            color: var(--primary-red);
+            padding: 16px 40px;
             border-radius: 14px;
             font-weight: 700;
             text-transform: uppercase;
-            border: 1px solid rgba(0, 84, 166, 0.2);
+            border: 1px solid rgba(227, 6, 19, 0.3);
             cursor: pointer;
             transition: var(--transition);
         }
 
         .btn-glass:hover {
-            background: var(--primary-blue);
+            background: var(--primary-red);
             color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 84, 166, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(227, 6, 19, 0.3);
         }
 
         /* --- SECTIONS --- */
-        .section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; display: none; }
+        .section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; display: none; }
         .section.active { display: block; animation: fadeInUp 0.5s ease; }
 
-        /* --- KACHELN --- */
-        .match-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+        /* --- HORIZONTALES SPIELPLAN SCROLLEN --- */
+        .gameday-ticker {
+            width: 100%;
+            overflow-x: auto; /* Aktiviert horizontales Scrollen */
+            padding: 10px 0 30px;
+            display: flex;
+            gap: 20px;
+            -webkit-overflow-scrolling: touch; /* Sanftes Scrollen auf iOS */
         }
 
-        .glass-card {
+        /* Versteckt die Scrollbar */
+        .gameday-ticker::-webkit-scrollbar { display: none; }
+
+        .match-card {
+            min-width: 300px; /* Breite einer Karte */
             background: white;
-            border-radius: 24px;
-            padding: 30px;
-            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid var(--border-light);
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             transition: var(--transition);
+            flex-shrink: 0; /* Verhindert das Zusammenquetschen */
         }
 
-        .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            border-color: var(--primary-blue);
+        .match-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            border-color: var(--primary-red);
         }
 
         .card-label {
@@ -193,21 +220,68 @@
             font-weight: 800;
             font-size: 0.75rem;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: block;
+        }
+
+        /* --- TEAM SEITEN LAYOUT --- */
+        .team-hero {
+            height: 450px;
+            background: white;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            border: 2px dashed rgba(227, 6, 19, 0.2); /* Rote gepunktete Linie */
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .team-hero img {
+            width: 100%; height: 100%; object-fit: cover; display: none;
+        }
+
+        .team-hero .placeholder-icon {
+            font-size: 5rem; color: rgba(227, 6, 19, 0.1); display: block;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 2fr 3fr; /* Tabelle links, Spielplan rechts */
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .nuLiga-widget {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-light);
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-muted);
         }
 
         /* --- FOOTER --- */
         footer {
-            padding: 80px 20px 40px;
+            padding: 80px 20px;
             text-align: center;
-            background: white;
-            border-top: 1px solid rgba(0,0,0,0.05);
+            background: var(--glass-light);
+            border-top: 2px solid var(--primary-red);
             color: var(--text-muted);
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive Anpassung für Team-Grid */
+        @media (max-width: 768px) {
+            .team-grid { grid-template-columns: 1fr; } /* Untereinander auf Handy */
+        }
 
     </style>
 </head>
@@ -215,22 +289,43 @@
 
 <nav>
     <div class="nav-container">
-        <div class="logo-text">SG BBM</div>
-        <ul class="nav-menu">
+        <div class="logo-text">SG BBM GbR</div> <ul class="nav-menu">
             <li class="nav-item"><a class="nav-link" onclick="showPage('home')">Home</a></li>
             <li class="nav-item">
-                <a class="nav-link">Teams</a>
+                <a class="nav-link has-dropdown">Teams</a>
                 <div class="dropdown">
-                    <p style="color:var(--primary-blue); font-weight:900; font-size:0.7rem; margin-bottom:8px; text-transform:uppercase;">Jugend</p>
+                    <p class="dropdown-section-title">Jugend Männlich</p>
                     <div class="sub-dropdown-menu">
-                        <a onclick="showTeam('männlich', 'A-E')">Männlich (A-E)</a>
-                        <a onclick="showTeam('weiblich', 'A-E')">Weiblich (A-E)</a>
+                        <a onclick="showTeamPage('männlich', 'A')">A-Jugend</a>
+                        <a onclick="showTeamPage('männlich', 'B')">B-Jugend</a>
+                        <a onclick="showTeamPage('männlich', 'C')">C-Jugend</a>
+                        <a onclick="showTeamPage('männlich', 'D')">D-Jugend</a>
+                        <a onclick="showTeamPage('männlich', 'E')">E-Jugend</a>
+                        <a onclick="showTeamPage('männlich', 'F')">F-Jugend</a>
                     </div>
                     
-                    <p style="color:var(--primary-blue); font-weight:900; font-size:0.7rem; margin-bottom:8px; text-transform:uppercase;">Aktive Mannschaften</p>
+                    <p class="dropdown-section-title">Jugend Weiblich</p>
                     <div class="sub-dropdown-menu">
-                        <a onclick="showTeam('Herren', '2.-5.')">Herren 2, 3, 4, 5</a>
-                        <a onclick="showTeam('Frauen', '1.-5.')">Frauen 1, 2, 3, 4, 5</a>
+                        <a onclick="showTeamPage('weiblich', 'A')">A-Jugend</a>
+                        <a onclick="showTeamPage('weiblich', 'B')">B-Jugend</a>
+                        <a onclick="showTeamPage('weiblich', 'C')">C-Jugend</a>
+                        <a onclick="showTeamPage('weiblich', 'D')">D-Jugend</a>
+                        <a onclick="showTeamPage('weiblich', 'E')">E-Jugend</a>
+                        <a onclick="showTeamPage('weiblich', 'F')">F-Jugend</a>
+                    </div>
+                    
+                    <p class="dropdown-section-title">Aktive Mannschaften</p>
+                    <div class="sub-dropdown-menu">
+                        <a onclick="showTeamPage('Aktive Herren', '2')">Herren 2</a>
+                        <a onclick="showTeamPage('Aktive Herren', '3')">Herren 3</a>
+                        <a onclick="showTeamPage('Aktive Herren', '4')">Herren 4</a>
+                        <a onclick="showTeamPage('Aktive Herren', '5')">Herren 5</a>
+                        <hr style="border:0; border-top:1px solid var(--border-light); margin:5px 0;">
+                        <a onclick="showTeamPage('Aktive Frauen', '1')">Frauen 1</a>
+                        <a onclick="showTeamPage('Aktive Frauen', '2')">Frauen 2</a>
+                        <a onclick="showTeamPage('Aktive Frauen', '3')">Frauen 3</a>
+                        <a onclick="showTeamPage('Aktive Frauen', '4')">Frauen 4</a>
+                        <a onclick="showTeamPage('Aktive Frauen', '5')">Frauen 5</a>
                     </div>
                 </div>
             </li>
@@ -243,81 +338,26 @@
     <section class="hero">
         <div class="main-logo-container">
             <img src="logo.png" alt="SGBBM Logo" id="main-logo-img">
-            <i class="fa fa-shield-halved" style="font-size: 5rem; color: var(--primary-blue); position: absolute;" id="logo-icon"></i>
+            <i class="fa fa-shield-halved placeholder-icon" id="logo-icon"></i>
         </div>
-        <h1>SG BBM<br>BIETIGHEIM</h1>
-        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 30px;">
-            Gemeinsam zum Erfolg. Entdecke unsere Teams und verpasse kein Heimspiel mehr.
+        <h1>SG BBM<br>GbR</h1> <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 35px;">
+            Tradition, Leidenschaft und Erfolg im Handball. Entdecke unsere Teams.
         </p>
-        <button class="btn-glass" onclick="window.scrollTo(0, 700)">Zum Spielplan</button>
+        <button class="btn-glass" onclick="window.scrollTo(0, 750)">Zum Spielplan</button>
     </section>
 </div>
 
 <main>
     <div id="page-home" class="section active">
-        <h2 style="font-size: 2rem; text-align: center; margin-bottom: 40px;">Kommende Spiele</h2>
-        <div class="match-grid">
-            <div class="glass-card">
+        <h2 style="font-size: 2rem; text-align: center; margin-bottom: 40px; color: var(--primary-red);">Kommende Highlights</h2>
+        
+        <div class="gameday-ticker">
+            <div class="match-card">
                 <span class="card-label">Heimspiel</span>
-                <h3 style="margin-bottom: 10px;">Herren 2 vs. Gegner</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem;"><i class="fa fa-calendar"></i> Samstag, 18:00 Uhr</p>
+                <h3>Herren 2 vs. Gegner A</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;"><i class="fa fa-calendar"></i> Sa, 18:00 Uhr • EgeTrans Arena</p>
             </div>
-            <div class="glass-card">
+            <div class="match-card">
                 <span class="card-label">Heimspiel</span>
-                <h3 style="margin-bottom: 10px;">Frauen 1 vs. Gegner</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem;"><i class="fa fa-calendar"></i> Sonntag, 15:30 Uhr</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="page-team" class="section">
-        <h2 id="team-display-name" style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px;">Team Name</h2>
-        <div class="glass-card" style="height: 300px; display: flex; align-items: center; justify-content: center; border-style: dashed;">
-            <p style="color: var(--text-muted);">Mannschaftsbild Upload</p>
-        </div>
-    </div>
-
-    <div id="page-about" class="section">
-        <h2 style="margin-bottom: 20px;">Die SG BBM GbR</h2>
-        <div class="glass-card">
-            <p>Hier stehen Informationen über die Geschichte und Vision der SG BBM Bietigheim GbR.</p>
-        </div>
-    </div>
-</main>
-
-<footer>
-    <div style="margin-bottom: 20px; font-size: 1.5rem; display: flex; justify-content: center; gap: 25px; color: var(--primary-blue);">
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-facebook"></i>
-    </div>
-    <p>&copy; 2026 SG BBM GbR</p>
-</footer>
-
-<script>
-    function showPage(pageId) {
-        document.getElementById('hero-area').style.display = (pageId === 'home') ? 'block' : 'none';
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(s => s.classList.remove('active'));
-        document.getElementById('page-' + pageId).classList.add('active');
-        window.scrollTo(0,0);
-    }
-
-    function showTeam(kategorie, name) {
-        document.getElementById('hero-area').style.display = 'none';
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(s => s.classList.remove('active'));
-        document.getElementById('team-display-name').innerText = kategorie + " " + name;
-        document.getElementById('page-team').classList.add('active');
-        window.scrollTo(0,0);
-    }
-
-    // Prüft ob Logo-Bild existiert, sonst zeigt es das Icon
-    const img = document.getElementById('main-logo-img');
-    img.onerror = function() {
-        img.style.display = 'none';
-        document.getElementById('logo-icon').style.display = 'block';
-    };
-</script>
-
-</body>
-</html>
+                <h3>A-Jugend (w) vs. Gegner B</h3>
+                <p style="color: var(--text-muted
