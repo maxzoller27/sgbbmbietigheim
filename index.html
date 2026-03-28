@@ -3,30 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGBBM Bietigheim | Next Level Handball</title>
+    <title>SG BBM Bietigheim | Offizielle Webseite</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #e30613; /* SGBBM Rot */
-            --primary-dark: #b3050f;
-            --dark: #121212;
-            --dark-card: #1e1e1e;
-            --text-light: #f5f5f7;
-            --text-dim: #a1a1a6;
-            --glass: rgba(255, 255, 255, 0.05);
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --primary-red: #e30613;
+            --primary-blue: #0054a6; /* Das klassische SGBBM Blau */
+            --bg-light: #f8f9fa;
+            --glass-white: rgba(255, 255, 255, 0.7);
+            --text-dark: #1d1d1f;
+            --text-muted: #6e6e73;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--dark);
-            color: var(--text-light);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
         /* --- NAVIGATION --- */
@@ -35,10 +33,10 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(18, 18, 18, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass);
-            padding: 15px 0;
+            background: var(--glass-white);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 84, 166, 0.1);
+            padding: 10px 0;
         }
 
         .nav-container {
@@ -52,160 +50,165 @@
 
         .logo-text {
             font-weight: 900;
-            font-size: 1.5rem;
-            letter-spacing: -1px;
-            color: var(--primary);
+            font-size: 1.4rem;
+            color: var(--primary-blue);
+            text-transform: uppercase;
         }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
+        .nav-menu { display: flex; list-style: none; gap: 25px; }
         .nav-item { position: relative; }
 
         .nav-link {
             text-transform: uppercase;
             font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            color: var(--text-dark);
             cursor: pointer;
-            padding: 10px 0;
-            color: var(--text-dim);
+            padding: 10px 15px;
+            border-radius: 8px;
             transition: var(--transition);
         }
 
-        .nav-link:hover { color: var(--primary); }
+        .nav-link:hover { background: rgba(0, 84, 166, 0.05); color: var(--primary-blue); }
 
-        /* Dropdown Styling */
+        /* Dropdowns */
         .dropdown {
             position: absolute;
             top: 100%;
             left: 0;
-            background: var(--dark-card);
-            min-width: 220px;
+            background: white;
+            min-width: 240px;
             border-radius: 12px;
             padding: 15px;
             display: none;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border: 1px solid var(--glass);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .nav-item:hover > .dropdown { display: block; animation: fadeIn 0.3s ease; }
+        .sub-dropdown-menu {
+            padding-left: 15px;
+            margin-bottom: 10px;
+            border-left: 2px solid var(--primary-blue);
+        }
+
+        .nav-item:hover > .dropdown { display: block; animation: fadeIn 0.2s ease; }
 
         .dropdown a {
             display: block;
-            padding: 10px;
-            color: var(--text-dim);
-            border-radius: 8px;
-            font-size: 0.9rem;
+            padding: 8px 10px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
             text-decoration: none;
+            border-radius: 6px;
         }
 
-        .dropdown a:hover { background: var(--glass); color: var(--primary); }
+        .dropdown a:hover { background: var(--bg-light); color: var(--primary-red); }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO / LOGO BEREICH --- */
         .hero {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 140px 20px 60px;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(18,18,18,1)), 
-                        url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=2000'); /* Sport-Background */
-            background-size: cover;
-            background-position: center;
-            padding: 0 20px;
+            background: radial-gradient(circle at top, rgba(0,84,166,0.05) 0%, transparent 70%);
         }
 
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 20px;
-            background: linear-gradient(to bottom, #fff, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(227, 6, 19, 0.3);
-            transition: var(--transition);
-        }
-
-        .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(227, 6, 19, 0.5); }
-
-        /* --- CONTENT SECTIONS --- */
-        .section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; display: none; }
-        .section.active { display: block; animation: fadeInUp 0.6s ease; }
-
-        /* --- MATCH CARDS (KACHELN) --- */
-        .match-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .match-card {
-            background: var(--dark-card);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid var(--glass);
-            transition: var(--transition);
+        .main-logo-container {
+            width: 220px;
+            height: 220px;
+            background: white;
+            margin: 0 auto 30px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,84,166,0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .match-card:hover { transform: scale(1.03); border-color: var(--primary); }
-
-        .match-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--primary);
+        .main-logo-container img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
         }
 
-        .match-time { color: var(--primary); font-weight: 900; font-size: 0.8rem; margin-bottom: 10px; display: block; }
-        .match-teams { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
-        .match-info { color: var(--text-dim); font-size: 0.9rem; }
-
-        /* --- ANIMATIONS --- */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- TEAM VIEW --- */
-        .team-hero {
-            height: 400px;
-            background: var(--dark-card);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 50px;
-            border: 1px dashed var(--glass);
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            letter-spacing: -2px;
         }
 
+        /* --- GLAS-BUTTONS --- */
+        .btn-glass {
+            background: rgba(0, 84, 166, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--primary-blue);
+            padding: 14px 35px;
+            border-radius: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid rgba(0, 84, 166, 0.2);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-glass:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 84, 166, 0.2);
+        }
+
+        /* --- SECTIONS --- */
+        .section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; display: none; }
+        .section.active { display: block; animation: fadeInUp 0.5s ease; }
+
+        /* --- KACHELN --- */
+        .match-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .glass-card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--primary-blue);
+        }
+
+        .card-label {
+            color: var(--primary-red);
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* --- FOOTER --- */
         footer {
-            padding: 60px 20px;
+            padding: 80px 20px 40px;
             text-align: center;
-            border-top: 1px solid var(--glass);
-            color: var(--text-dim);
-            font-size: 0.9rem;
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-muted);
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .nav-menu { display: none; } /* Vereinfacht für dieses Beispiel */
-            .hero h1 { font-size: 3.5rem; }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
     </style>
 </head>
 <body>
@@ -216,19 +219,19 @@
         <ul class="nav-menu">
             <li class="nav-item"><a class="nav-link" onclick="showPage('home')">Home</a></li>
             <li class="nav-item">
-                <a class="nav-link">Teams <i class="fa fa-chevron-down" style="font-size: 0.7rem"></i></a>
+                <a class="nav-link">Teams</a>
                 <div class="dropdown">
-                    <p style="color:var(--primary); font-weight:900; font-size:0.7rem; margin-bottom:10px; text-transform:uppercase;">Jugend Männlich</p>
-                    <a onclick="showTeam('männlich', 'A')">A-Jugend</a>
-                    <a onclick="showTeam('männlich', 'B')">B-Jugend</a>
-                    <a onclick="showTeam('männlich', 'C')">C-Jugend</a>
-                    <hr style="border:0; border-top:1px solid var(--glass); margin:10px 0;">
-                    <p style="color:var(--primary); font-weight:900; font-size:0.7rem; margin-bottom:10px; text-transform:uppercase;">Jugend Weiblich</p>
-                    <a onclick="showTeam('weiblich', 'A')">A-Jugend</a>
-                    <a onclick="showTeam('weiblich', 'B')">B-Jugend</a>
-                    <a onclick="showTeam('weiblich', 'C')">C-Jugend</a>
-                    <hr style="border:0; border-top:1px solid var(--glass); margin:10px 0;">
-                    <a onclick="showPage('breitensport')">Breitensport</a>
+                    <p style="color:var(--primary-blue); font-weight:900; font-size:0.7rem; margin-bottom:8px; text-transform:uppercase;">Jugend</p>
+                    <div class="sub-dropdown-menu">
+                        <a onclick="showTeam('männlich', 'A-E')">Männlich (A-E)</a>
+                        <a onclick="showTeam('weiblich', 'A-E')">Weiblich (A-E)</a>
+                    </div>
+                    
+                    <p style="color:var(--primary-blue); font-weight:900; font-size:0.7rem; margin-bottom:8px; text-transform:uppercase;">Aktive Mannschaften</p>
+                    <div class="sub-dropdown-menu">
+                        <a onclick="showTeam('Herren', '2.-5.')">Herren 2, 3, 4, 5</a>
+                        <a onclick="showTeam('Frauen', '1.-5.')">Frauen 1, 2, 3, 4, 5</a>
+                    </div>
                 </div>
             </li>
             <li class="nav-item"><a class="nav-link" onclick="showPage('about')">Über uns</a></li>
@@ -238,107 +241,82 @@
 
 <div id="hero-area">
     <section class="hero">
-        <h1 id="dynamic-title">SGBBM<br>BIETIGHEIM</h1>
-        <p style="color: var(--text-dim); max-width: 600px; margin-bottom: 30px; font-size: 1.1rem;">
-            Tradition, Leidenschaft und purer Handball. Werde Teil der SGBBM Familie.
+        <div class="main-logo-container">
+            <img src="logo.png" alt="SGBBM Logo" id="main-logo-img">
+            <i class="fa fa-shield-halved" style="font-size: 5rem; color: var(--primary-blue); position: absolute;" id="logo-icon"></i>
+        </div>
+        <h1>SG BBM<br>BIETIGHEIM</h1>
+        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 30px;">
+            Gemeinsam zum Erfolg. Entdecke unsere Teams und verpasse kein Heimspiel mehr.
         </p>
-        <button class="btn-primary" onclick="window.scrollTo(0, 800)">Spielplan ansehen</button>
+        <button class="btn-glass" onclick="window.scrollTo(0, 700)">Zum Spielplan</button>
     </section>
 </div>
 
 <main>
     <div id="page-home" class="section active">
-        <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Gameday</h2>
-        <p style="color: var(--text-dim);">Die nächsten Highlights in der Halle</p>
-        
+        <h2 style="font-size: 2rem; text-align: center; margin-bottom: 40px;">Kommende Spiele</h2>
         <div class="match-grid">
-            <div class="match-card">
-                <span class="match-time">Samstag • 19:30</span>
-                <div class="match-teams">Herren 1 vs. Rhein-Neckar Löwen 2</div>
-                <div class="match-info">EgeTrans Arena • 3. Liga</div>
+            <div class="glass-card">
+                <span class="card-label">Heimspiel</span>
+                <h3 style="margin-bottom: 10px;">Herren 2 vs. Gegner</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;"><i class="fa fa-calendar"></i> Samstag, 18:00 Uhr</p>
             </div>
-            <div class="match-card">
-                <span class="match-time">Sonntag • 15:00</span>
-                <div class="match-teams">A-Jugend (m) vs. JSG Balingen</div>
-                <div class="match-info">Viadukthalle • Bundesliga Süd</div>
-            </div>
-            <div class="match-card">
-                <span class="match-time">Sonntag • 17:00</span>
-                <div class="match-teams">Frauen 1 vs. Buxtehuder SV</div>
-                <div class="match-info">EgeTrans Arena • 1. Bundesliga</div>
+            <div class="glass-card">
+                <span class="card-label">Heimspiel</span>
+                <h3 style="margin-bottom: 10px;">Frauen 1 vs. Gegner</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;"><i class="fa fa-calendar"></i> Sonntag, 15:30 Uhr</p>
             </div>
         </div>
     </div>
 
     <div id="page-team" class="section">
-        <h2 id="team-display-name" style="font-size: 3rem; margin-bottom: 20px;">Team</h2>
-        <div class="team-hero">
-            <i class="fa fa-users" style="font-size: 4rem; opacity: 0.2;"></i>
-            <span style="margin-left: 20px; color: var(--text-dim);">Mannschaftsbild Upload erforderlich</span>
-        </div>
-        
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
-            <div class="match-card" style="height: 400px; display: flex; align-items: center; justify-content: center;">
-                <p style="color: var(--text-dim); text-align: center;">
-                    <i class="fa fa-table" style="display: block; font-size: 2rem; margin-bottom: 10px;"></i>
-                    nuLiga Tabelle wird geladen...
-                </p>
-            </div>
-            <div class="match-card">
-                <h4 style="margin-bottom: 20px;">Trainer-Team</h4>
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--glass);"></div>
-                    <div>
-                        <p style="font-weight: 700;">Max Mustermann</p>
-                        <p style="font-size: 0.8rem; color: var(--text-dim);">Chef-Trainer</p>
-                    </div>
-                </div>
-            </div>
+        <h2 id="team-display-name" style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px;">Team Name</h2>
+        <div class="glass-card" style="height: 300px; display: flex; align-items: center; justify-content: center; border-style: dashed;">
+            <p style="color: var(--text-muted);">Mannschaftsbild Upload</p>
         </div>
     </div>
 
     <div id="page-about" class="section">
-        <h2 style="font-size: 3rem; margin-bottom: 30px;">Unsere Vision</h2>
-        <div class="match-card">
-            <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text-dim);">
-                Die SG BBM Bietigheim ist mehr als nur ein Sportverein. Wir sind eine Gemeinschaft, die seit Jahrzehnten 
-                junge Talente fördert und den Handballsport in der Region Bietigheim-Bissingen, Metterzimmern und 
-                Bruchsal fest verankert. Vom kleinsten "Mini" bis zum Profi-Kader leben wir denselben Traum.
-            </p>
+        <h2 style="margin-bottom: 20px;">Die SG BBM GbR</h2>
+        <div class="glass-card">
+            <p>Hier stehen Informationen über die Geschichte und Vision der SG BBM Bietigheim GbR.</p>
         </div>
     </div>
 </main>
 
 <footer>
-    <p>&copy; 2026 SGBBM Bietigheim Handball Club</p>
-    <div style="margin-top: 20px; font-size: 1.2rem; display: flex; justify-content: center; gap: 20px;">
+    <div style="margin-bottom: 20px; font-size: 1.5rem; display: flex; justify-content: center; gap: 25px; color: var(--primary-blue);">
         <i class="fab fa-instagram"></i>
         <i class="fab fa-facebook"></i>
-        <i class="fab fa-youtube"></i>
     </div>
+    <p>&copy; 2026 SG BBM GbR</p>
 </footer>
 
 <script>
     function showPage(pageId) {
-        // Hero nur auf Home zeigen
         document.getElementById('hero-area').style.display = (pageId === 'home') ? 'block' : 'none';
-        
         const sections = document.querySelectorAll('.section');
         sections.forEach(s => s.classList.remove('active'));
-        
         document.getElementById('page-' + pageId).classList.add('active');
         window.scrollTo(0,0);
     }
 
-    function showTeam(geschlecht, jugend) {
+    function showTeam(kategorie, name) {
         document.getElementById('hero-area').style.display = 'none';
         const sections = document.querySelectorAll('.section');
         sections.forEach(s => s.classList.remove('active'));
-        
-        document.getElementById('team-display-name').innerText = jugend + "-Jugend " + geschlecht;
+        document.getElementById('team-display-name').innerText = kategorie + " " + name;
         document.getElementById('page-team').classList.add('active');
         window.scrollTo(0,0);
     }
+
+    // Prüft ob Logo-Bild existiert, sonst zeigt es das Icon
+    const img = document.getElementById('main-logo-img');
+    img.onerror = function() {
+        img.style.display = 'none';
+        document.getElementById('logo-icon').style.display = 'block';
+    };
 </script>
 
 </body>
