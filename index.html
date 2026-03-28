@@ -47,7 +47,6 @@
 
         .nav-menu { display: flex; gap: 30px; list-style: none; align-items: center; height: 100%; }
         
-        /* WICHTIG: Die nav-item Klasse bekommt volle Höhe für lückenlosen Übergang */
         .nav-item-teams { 
             position: relative; 
             height: 52px; 
@@ -58,10 +57,10 @@
         .nav-link { font-size: 13px; font-weight: 400; color: var(--text-main); cursor: pointer; height: 100%; display: flex; align-items: center; }
         .nav-link:hover { color: var(--apple-red); }
 
-        /* MEGA MENU TEAMS - Ohne Lücke angedockt */
+        /* MEGA MENU TEAMS */
         .mega-menu {
             position: absolute;
-            top: 52px; /* Exakt die Höhe der Nav */
+            top: 52px;
             left: 50%;
             transform: translateX(-50%);
             width: 90vw;
@@ -76,7 +75,6 @@
             z-index: 1999;
         }
 
-        /* Der Trick: Ein unsichtbarer Puffer-Bereich */
         .nav-item-teams:hover .mega-menu { 
             display: block; 
             animation: appleFade 0.3s ease; 
@@ -118,7 +116,14 @@
         .team-img-placeholder {
             width: 100%; height: 450px; background: #f5f5f7; border-radius: 28px;
             margin-bottom: 40px; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; /* Wichtig für das Bild */
         }
+        
+        /* Das eigentliche Mannschaftsbild */
+        #team-img {
+            width: 100%; height: 100%; object-fit: cover; display: none; /* Erst versteckt */
+        }
+
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .widget-box { background: #f5f5f7; border-radius: 22px; padding: 30px; height: 500px; text-align: center; }
 
@@ -184,7 +189,7 @@
     <div id="page-home" class="section active">
         <section class="hero">
             <div class="logo-box">
-                <img src="SG_BBM_Bietigheim_Logo.jpg" alt="SG BBM Logo" id="main-logo" onerror="this.src='https://via.placeholder.com/150?text=Logo'">
+                <img src="logo.png" alt="SG BBM Logo" id="main-logo" onerror="this.src='https://via.placeholder.com/150?text=Logo'">
             </div>
             <h1>SG BBM GbR</h1>
             <h2>Leidenschaft. Exzellenz. Handball.</h2>
@@ -216,7 +221,8 @@
             <p id="team-sub" style="color: var(--text-secondary); font-size: 24px; margin-bottom: 40px;">Saison 2026/27</p>
             
             <div class="team-img-placeholder">
-                <i class="fa-solid fa-users" style="font-size: 80px; color: #d2d2d7"></i>
+                <img src="" id="team-img" alt="Mannschaftsbild">
+                <i class="fa-solid fa-users" id="team-icon" style="font-size: 80px; color: #d2d2d7"></i>
             </div>
 
             <div class="team-grid">
@@ -257,12 +263,40 @@
     function showTeam(kat, name) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         
+        // Titel setzen
         let title = kat + " " + name + "-Jugend";
-        if(kat.includes('Herren') || kat.includes('Frauen')) {
+        let imageName = "";
+
+        if(kat === 'männlich') {
+            imageName = "mj" + name.toLowerCase() + ".jpg"; // z.B. mja.jpg
+        } else if (kat === 'weiblich') {
+            imageName = "wj" + name.toLowerCase() + ".jpg"; // z.B. wja.jpg
+        } else if(kat.includes('Herren') || kat.includes('Frauen')) {
             title = kat + " " + name;
+            imageName = kat.toLowerCase() + name + ".jpg"; // z.B. herren2.jpg
         }
         
         document.getElementById('team-title').innerText = title;
+        
+        // BILD LOGIK
+        const teamImg = document.getElementById('team-img');
+        const teamIcon = document.getElementById('team-icon');
+        
+        if (imageName !== "") {
+            teamImg.src = imageName;
+            teamImg.style.display = 'block';
+            teamIcon.style.display = 'none';
+        } else {
+            teamImg.style.display = 'none';
+            teamIcon.style.display = 'block';
+        }
+
+        // Falls das Bild nicht lädt (onerror), zeige wieder das Icon
+        teamImg.onerror = function() {
+            this.style.display = 'none';
+            teamIcon.style.display = 'block';
+        };
+
         document.getElementById('page-team').classList.add('active');
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
