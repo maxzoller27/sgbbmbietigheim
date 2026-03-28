@@ -35,17 +35,31 @@
             backdrop-filter: saturate(180%) blur(20px);
             border-bottom: 1px solid var(--border-subtle);
             height: 52px;
-            display: flex; align-items: center;
+            display: flex; 
+            align-items: center;
         }
 
         .nav-container {
-            max-width: 1000px; margin: 0 auto; width: 100%;
-            display: flex; justify-content: space-between; padding: 0 22px;
+            max-width: 1000px; 
+            margin: 0 auto; 
+            width: 100%;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 0 22px;
         }
 
-        .logo-text { font-weight: 700; font-size: 1.1rem; cursor: pointer; color: var(--apple-blue); }
+        .logo-text { 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            cursor: pointer; 
+            color: var(--apple-blue);
+            line-height: 52px;
+            display: flex;
+            align-items: center;
+        }
 
-        .nav-menu { display: flex; gap: 30px; list-style: none; align-items: center; height: 100%; }
+        .nav-menu { display: flex; gap: 30px; list-style: none; align-items: center; height: 52px; }
         
         .nav-item-teams { 
             position: relative; 
@@ -91,6 +105,19 @@
         /* --- SECTIONS --- */
         .section { display: none; padding-top: 100px; min-height: 100vh; }
         .section.active { display: block; animation: appleFade 0.6s ease; }
+
+        /* --- CONTENT STYLES --- */
+        .content-card {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 40px;
+            background: #f5f5f7;
+            border-radius: 28px;
+            text-align: left;
+        }
+        .content-card h1 { font-size: 48px; margin-bottom: 20px; letter-spacing: -0.02em; }
+        .content-card p { font-size: 18px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; }
+        .contact-info { font-size: 20px; color: var(--text-main); line-height: 1.8; }
 
         /* --- HERO --- */
         .hero { text-align: center; padding: 60px 20px; max-width: 800px; margin: 0 auto; }
@@ -176,6 +203,7 @@
                 </div>
             </li>
             <li><span class="nav-link" onclick="showPage('about')">Über uns</span></li>
+            <li><span class="nav-link" onclick="showPage('contact')">Kontakt</span></li>
         </ul>
     </div>
 </nav>
@@ -189,6 +217,26 @@
             <h1>SG BBM GbR</h1>
             <h2>Leidenschaft. Exzellenz. Handball.</h2>
         </section>
+    </div>
+
+    <div id="page-about" class="section">
+        <div class="content-card">
+            <h1>Über uns</h1>
+            <p>Die SG BBM Bietigheim steht für Leidenschaft, Teamgeist und Spitzenhandball in der Region. Als starke Gemeinschaft aus Bietigheim, Bissingen und Metterzimmern fördern wir Talente von den kleinsten Minis bis hin zu unseren erfolgreichen Aktiven-Mannschaften.</p>
+            <p>Unsere Mission ist es, die Faszination des Handballsports jeden Tag erlebbar zu machen – sowohl durch sportliche Exzellenz auf dem Feld als auch durch ein starkes Miteinander abseits des Spielfelds.</p>
+        </div>
+    </div>
+
+    <div id="page-contact" class="section">
+        <div class="content-card">
+            <h1>Kontakt</h1>
+            <div class="contact-info">
+                <strong>SG BBM Bietigheim Geschäftsstelle</strong><br>
+                Schwarzwaldstraße 27<br>
+                74321 Bietigheim<br><br>
+                <i class="fa-solid fa-phone"></i> +49 7142 919780
+            </div>
+        </div>
     </div>
 
     <div id="page-team" class="section">
@@ -224,9 +272,8 @@
         
         if(kat === 'männlich') {
             title = "Männliche " + name + "-Jugend";
-            // FALLS MÄNLICHE A: SPEZIFISCHES FOTO-NAME LADEN
             if(name === 'A') {
-                teamImgPath = "ajugendteamfoto.jpg"; // Dein spezifischer Dateiname
+                teamImgPath = "ajugendteamfoto.jpg"; 
             } else {
                 teamImgPath = "mj" + name.toLowerCase() + ".jpg"; 
             }
@@ -251,9 +298,8 @@
             teamIcon.style.display = 'block';
         };
 
-        // HANDBALL.NET WIDGET LADEN
         const container = document.getElementById('handball-tabelle');
-        container.innerHTML = ""; // Leeren
+        container.innerHTML = ""; 
 
         if (kat === 'männlich' && name === 'A') {
             _hb({
