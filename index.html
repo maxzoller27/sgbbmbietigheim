@@ -47,7 +47,7 @@
 
         .logo-text { font-weight: 700; font-size: 1.1rem; cursor: pointer; color: var(--apple-blue); z-index: 2001; }
 
-        .nav-menu { display: flex; gap: 30px; list-style: none; align-items: center; }
+        .nav-menu { display: flex; gap: 25px; list-style: none; align-items: center; }
         .nav-link { font-size: 13px; font-weight: 400; color: var(--text-main); cursor: pointer; text-decoration: none; }
         .nav-link:hover { color: var(--apple-red); }
 
@@ -68,38 +68,54 @@
         .mega-col a { display: block; font-size: 14px; padding: 7px 0; text-decoration: none; color: var(--text-main); cursor: pointer; }
         .mega-col a:hover { color: var(--apple-red); }
 
-        /* --- NEWS SLIDER --- */
-        .news-section { margin-top: 40px; padding: 0 20px; }
-        .news-header { max-width: 1000px; margin: 0 auto 20px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .news-header h3 { font-size: 24px; font-weight: 700; }
+        /* --- NEWS SLIDER (Home) --- */
+        .news-section { margin-top: 40px; padding: 0 20px; width: 100%; max-width: 1050px; margin-left: auto; margin-right: auto; }
+        .news-header { padding: 0 10px; margin-bottom: 20px; }
+        .news-header h3 { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; }
         
         .news-slider {
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             gap: 20px;
-            padding: 10px 0 30px 0;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
+            padding: 10px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-        .news-slider::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+        .news-slider::-webkit-scrollbar { display: none; }
 
         .news-card {
-            flex: 0 0 300px;
+            flex: 0 0 320px;
             background: var(--card-bg);
             border-radius: 22px;
             padding: 25px;
-            scroll-snap-align: center;
-            transition: transform 0.3s ease;
+            scroll-snap-align: start;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 200px;
+            min-height: 240px;
+            cursor: pointer;
         }
-        .news-card:hover { transform: scale(1.02); }
-        .news-card h4 { font-size: 18px; margin-bottom: 10px; }
-        .news-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
-        .news-date { font-size: 12px; font-weight: 600; color: var(--apple-red); text-transform: uppercase; margin-bottom: 8px; }
+        .news-card:hover { transform: translateY(-5px); background: #f0f0f2; }
+        .news-card h4 { font-size: 19px; margin-bottom: 10px; line-height: 1.2; }
+        .news-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px; }
+        .news-date { font-size: 12px; font-weight: 700; color: var(--apple-red); text-transform: uppercase; margin-bottom: 8px; }
+        
+        .read-more-btn { font-size: 14px; font-weight: 600; color: var(--apple-blue); border: none; background: none; cursor: pointer; padding: 0; text-align: left; }
+
+        /* --- NEWS MODAL (Detailansicht) --- */
+        .modal {
+            display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+        }
+        .modal-content {
+            background-color: #fff; margin: 5% auto; padding: 40px; border-radius: 30px;
+            max-width: 700px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative;
+        }
+        .close-modal { position: absolute; right: 25px; top: 20px; font-size: 28px; cursor: pointer; color: var(--text-secondary); }
+        .modal-body h2 { margin-bottom: 15px; font-size: 32px; }
+        .modal-body .full-text { line-height: 1.8; font-size: 17px; color: #333; white-space: pre-line; }
 
         /* --- MOBILE STYLES --- */
         @media (max-width: 768px) {
@@ -123,7 +139,9 @@
             .team-toggle-icon { margin-left: 10px; transition: transform 0.3s; }
             .team-toggle-icon.rotated { transform: rotate(180deg); }
 
-            .news-card { flex: 0 0 85%; } /* Karten auf Handy breiter */
+            .news-card { flex: 0 0 280px; scroll-snap-align: center; }
+            .news-slider { padding-left: 20px; padding-right: 20px; }
+            .modal-content { padding: 25px; margin-top: 15%; }
         }
 
         /* --- SECTIONS --- */
@@ -160,6 +178,7 @@
         </div>
         <ul class="nav-menu" id="main-nav-menu">
             <li><span class="nav-link" onclick="closeAndShow('home')">Home</span></li>
+            <li><span class="nav-link" onclick="closeAndShow('news-page')">News</span></li>
             <li class="nav-item-teams">
                 <div class="team-toggle-wrapper" onclick="toggleTeamsDropdown(event)">
                     <span class="nav-link">Teams</span>
@@ -207,6 +226,17 @@
 </nav>
 
 <main>
+    <div id="newsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeNews()">&times;</span>
+            <div id="modal-body-content" class="modal-body">
+                <div class="news-date" id="modal-date"></div>
+                <h2 id="modal-title"></h2>
+                <div class="full-text" id="modal-text"></div>
+            </div>
+        </div>
+    </div>
+
     <div id="page-home" class="section active">
         <section class="hero">
             <div class="logo-box">
@@ -218,39 +248,46 @@
 
         <section class="news-section">
             <div class="news-header">
-                <h3>Aktuelles</h3>
+                <h3>News</h3>
             </div>
             <div class="news-slider">
-                <div class="news-card">
+                <div class="news-card" onclick="openNews('Heimsieg der A-Jugend!', '29. MÄR 2026', 'Ein spannendes Spiel in der Viethalle endet mit einem verdienten Sieg für unsere Jungs.\n\nNach einer harten ersten Halbzeit (12:12) konnte sich unser Team in der zweiten Hälfte durch eine überragende Abwehrleistung absetzen. Besonders hervorzuheben ist unser Torhüter, der drei Siebenmeter parierte. Am Ende stand ein klares 28:24 auf der Anzeigetafel. Vielen Dank an alle Fans für die lautstarke Unterstützung!')">
                     <div>
                         <div class="news-date">29. MÄR 2026</div>
                         <h4>Heimsieg der A-Jugend!</h4>
-                        <p>Ein spannendes Spiel in der Viethalle endet mit einem verdienten Sieg für unsere Jungs.</p>
+                        <p>Ein spannendes Spiel in der Viethalle endet mit einem verdienten Sieg für unsere Jungs...</p>
                     </div>
+                    <button class="read-more-btn">Mehr lesen</button>
                 </div>
-                <div class="news-card">
+                
+                <div class="news-card" onclick="openNews('Neue Trikots für die Minis', '25. MÄR 2026', 'Dank unseres neuen Sponsors erstrahlen die kleinsten Talente nun in neuem Glanz.\n\nDie offizielle Übergabe fand am Mittwoch in der Halle statt. Die Kinder haben sich riesig über das neue Design gefreut und konnten es kaum erwarten, die ersten Tore in den neuen Trikots zu werfen.')">
                     <div>
                         <div class="news-date">25. MÄR 2026</div>
                         <h4>Neue Trikots für die Minis</h4>
-                        <p>Dank unseres Sponsors erstrahlen die kleinsten Talente nun in neuem Glanz.</p>
+                        <p>Dank unseres Sponsors erstrahlen die kleinsten Talente nun in neuem Glanz...</p>
                     </div>
+                    <button class="read-more-btn">Mehr lesen</button>
                 </div>
-                <div class="news-card">
+
+                <div class="news-card" onclick="openNews('Trainingslager Sommer', '20. MÄR 2026', 'Die Anmeldung für das Sommer-Camp ist ab sofort für alle Jugendmannschaften geöffnet.\n\nVom 03. bis 07. August dreht sich alles um den Ball. Technik, Taktik und vor allem viel Spaß stehen auf dem Programm. Meldet euch schnell an, die Plätze sind begrenzt!')">
                     <div>
                         <div class="news-date">20. MÄR 2026</div>
                         <h4>Trainingslager Sommer</h4>
-                        <p>Die Anmeldung für das Sommer-Camp ist ab sofort für alle Jugendmannschaften geöffnet.</p>
+                        <p>Die Anmeldung für das Sommer-Camp ist ab sofort für alle Jugendmannschaften geöffnet...</p>
                     </div>
-                </div>
-                <div class="news-card">
-                    <div>
-                        <div class="news-date">15. MÄR 2026</div>
-                        <h4>Frauen 1 rücken vor</h4>
-                        <p>Nach einer starken Auswärtsserie klettert unser Team weiter nach oben in der Tabelle.</p>
-                    </div>
+                    <button class="read-more-btn">Mehr lesen</button>
                 </div>
             </div>
         </section>
+    </div>
+
+    <div id="page-news-page" class="section">
+        <div class="content-card">
+            <h2>Alle News</h2>
+            <p style="color: var(--text-secondary);">Hier findest du alle aktuellen Spielberichte und Neuigkeiten.</p>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+            <p>Die neuesten Berichte findest du aktuell direkt auf unserer Startseite!</p>
+        </div>
     </div>
 
     <div id="page-about" class="section">
@@ -290,6 +327,25 @@
 </main>
 
 <script>
+    // NEWS MODAL LOGIK
+    function openNews(title, date, text) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-date').innerText = date;
+        document.getElementById('modal-text').innerText = text;
+        document.getElementById('newsModal').style.display = "block";
+        document.body.style.overflow = "hidden"; // Scrollen verhindern
+    }
+
+    function closeNews() {
+        document.getElementById('newsModal').style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('newsModal')) closeNews();
+    }
+
+    // NAVIGATION LOGIK
     function toggleMobileMenu() {
         const menu = document.getElementById('main-nav-menu');
         const icon = document.getElementById('menu-icon');
