@@ -26,6 +26,9 @@
             background-color: var(--bg-body);
             color: var(--text-main);
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* --- NAVIGATION --- */
@@ -55,7 +58,7 @@
 
         .nav-item-teams { position: relative; height: 52px; display: flex; align-items: center; }
         
-        /* MEGA MENU (Desktop) */
+        /* MEGA MENU */
         .mega-menu {
             position: absolute; top: 52px; left: 50%; transform: translateX(-50%);
             width: 90vw; max-width: 1000px; background: white; border-radius: 0 0 24px 24px;
@@ -68,21 +71,17 @@
         .mega-col a { display: block; font-size: 14px; padding: 7px 0; text-decoration: none; color: var(--text-main); cursor: pointer; }
         .mega-col a:hover { color: var(--apple-red); }
 
-        /* --- NEWS SLIDER (Home) --- */
+        /* --- NEWS SLIDER & GRID --- */
         .news-section { margin-top: 40px; padding: 0 20px; width: 100%; max-width: 1050px; margin-left: auto; margin-right: auto; }
         .news-header { padding: 0 10px; margin-bottom: 20px; }
-        .news-header h3 { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; }
+        .news-header h3 { font-size: 28px; font-weight: 700; }
         
-        .news-slider {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 20px;
-            padding: 10px;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+        .news-slider, .news-grid {
+            display: flex; gap: 20px; padding: 10px;
         }
+        .news-slider { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
         .news-slider::-webkit-scrollbar { display: none; }
+        .news-grid { flex-wrap: wrap; justify-content: flex-start; }
 
         .news-card {
             flex: 0 0 320px;
@@ -99,12 +98,10 @@
         }
         .news-card:hover { transform: translateY(-5px); background: #f0f0f2; }
         .news-card h4 { font-size: 19px; margin-bottom: 10px; line-height: 1.2; }
-        .news-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px; }
+        .news-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
         .news-date { font-size: 12px; font-weight: 700; color: var(--apple-red); text-transform: uppercase; margin-bottom: 8px; }
-        
-        .read-more-btn { font-size: 14px; font-weight: 600; color: var(--apple-blue); border: none; background: none; cursor: pointer; padding: 0; text-align: left; }
 
-        /* --- NEWS MODAL (Detailansicht) --- */
+        /* --- MODAL --- */
         .modal {
             display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
@@ -114,8 +111,6 @@
             max-width: 700px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative;
         }
         .close-modal { position: absolute; right: 25px; top: 20px; font-size: 28px; cursor: pointer; color: var(--text-secondary); }
-        .modal-body h2 { margin-bottom: 15px; font-size: 32px; }
-        .modal-body .full-text { line-height: 1.8; font-size: 17px; color: #333; white-space: pre-line; }
 
         /* --- MOBILE STYLES --- */
         @media (max-width: 768px) {
@@ -127,39 +122,39 @@
             }
             .nav-menu.active { transform: translateY(0); }
             .mobile-menu-toggle { display: block; }
-            
-            .mega-menu { position: static; transform: none; width: 100%; box-shadow: none; display: none; padding: 10px; border: none; text-align: center; }
+            .mega-menu { position: static; transform: none; width: 100%; display: none; padding: 10px; text-align: center; border: none; box-shadow: none; }
             .mega-menu.mobile-open { display: block; }
-            
-            .mega-container { grid-template-columns: 1fr; gap: 20px; }
-            .nav-item-teams { flex-direction: column; height: auto; align-items: center; width: 100%; }
-            .nav-link { font-size: 18px; font-weight: 600; padding: 15px 0; width: 100%; text-align: center; }
-            
-            .team-toggle-wrapper { display: flex; align-items: center; justify-content: center; width: 100%; cursor: pointer; }
-            .team-toggle-icon { margin-left: 10px; transition: transform 0.3s; }
-            .team-toggle-icon.rotated { transform: rotate(180deg); }
-
+            .nav-item-teams { flex-direction: column; height: auto; width: 100%; }
             .news-card { flex: 0 0 280px; scroll-snap-align: center; }
-            .news-slider { padding-left: 20px; padding-right: 20px; }
-            .modal-content { padding: 25px; margin-top: 15%; }
         }
 
         /* --- SECTIONS --- */
-        .section { display: none; padding-top: 100px; min-height: 100vh; width: 100%; }
+        main { flex: 1; }
+        .section { display: none; padding-top: 100px; min-height: 80vh; width: 100%; }
         .section.active { display: block; animation: appleFade 0.5s ease; }
         
-        .content-card { max-width: 800px; margin: 0 auto 30px; padding: 40px; background: var(--card-bg); border-radius: 28px; }
-        .content-card h2 { font-size: 48px; margin-bottom: 20px; letter-spacing: -0.02em; }
-        
+        .clean-content { max-width: 800px; margin: 0 auto; padding: 0 20px 60px; text-align: left; }
+        .clean-content h2 { font-size: 48px; margin-bottom: 30px; letter-spacing: -0.03em; font-weight: 800; }
+        .clean-content p { font-size: 21px; line-height: 1.6; color: var(--text-main); margin-bottom: 25px; font-weight: 400; }
+
         .hero { text-align: center; padding: 20px 20px; }
-        .hero h1 { font-size: clamp(32px, 10vw, 56px); font-weight: 700; margin-bottom: 10px; }
-        .logo-box { width: 160px; height: 160px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; }
+        .logo-box { width: 160px; height: 160px; margin: 0 auto 20px; }
         .logo-box img { width: 100%; border-radius: 12px; }
 
         .team-content { max-width: 1000px; margin: 0 auto; padding: 20px; }
-        .team-img-placeholder { width: 100%; height: auto; min-height: 250px; background: var(--card-bg); border-radius: 20px; margin-bottom: 20px; overflow: hidden; display: flex; align-items: center; justify-content: center;}
-        #team-img { width: 100%; height: auto; display: none; object-fit: cover; }
-        .widget-box { background: var(--card-bg); border-radius: 20px; padding: 15px; overflow-x: auto; min-height: 400px;}
+        .widget-box { background: var(--card-bg); border-radius: 20px; padding: 20px; margin-bottom: 30px; overflow-x: auto; }
+
+        /* --- FOOTER / COPYRIGHT --- */
+        footer {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-size: 12px;
+            text-align: left;
+        }
 
         @keyframes appleFade { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -180,9 +175,9 @@
             <li><span class="nav-link" onclick="closeAndShow('home')">Home</span></li>
             <li><span class="nav-link" onclick="closeAndShow('news-page')">News</span></li>
             <li class="nav-item-teams">
-                <div class="team-toggle-wrapper" onclick="toggleTeamsDropdown(event)">
+                <div class="team-toggle-wrapper" onclick="toggleTeamsDropdown(event)" style="display:flex; align-items:center; cursor:pointer;">
                     <span class="nav-link">Teams</span>
-                    <i class="fa-solid fa-chevron-down team-toggle-icon" id="team-chevron"></i>
+                    <i class="fa-solid fa-chevron-down team-toggle-icon" id="team-chevron" style="font-size:10px; margin-left:5px;"></i>
                 </div>
                 <div class="mega-menu" id="teams-mega-menu">
                     <div class="mega-container">
@@ -229,10 +224,10 @@
     <div id="newsModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeNews()">&times;</span>
-            <div id="modal-body-content" class="modal-body">
+            <div id="modal-body-content">
                 <div class="news-date" id="modal-date"></div>
-                <h2 id="modal-title"></h2>
-                <div class="full-text" id="modal-text"></div>
+                <h2 id="modal-title" style="margin-bottom:20px;"></h2>
+                <div id="modal-text" style="line-height:1.8; white-space:pre-line;"></div>
             </div>
         </div>
     </div>
@@ -240,192 +235,172 @@
     <div id="page-home" class="section active">
         <section class="hero">
             <div class="logo-box">
-                <img src="SG_BBM_Bietigheim_Logo.jpg" alt="Logo" onerror="this.src='https://via.placeholder.com/150'">
+                <img src="SG_BBM_Bietigheim_Logo.jpg" alt="Logo">
             </div>
             <h1>SG BBM GbR</h1>
             <p style="color: var(--text-secondary); font-size: 24px;">Leidenschaft. Exzellenz. Handball.</p>
         </section>
 
         <section class="news-section">
-            <div class="news-header">
-                <h3>News</h3>
-            </div>
-            <div class="news-slider">
-                <div class="news-card" onclick="openNews('Heimsieg der A-Jugend!', '29. MÄR 2026', 'Ein spannendes Spiel in der Viethalle endet mit einem verdienten Sieg für unsere Jungs.\n\nNach einer harten ersten Halbzeit (12:12) konnte sich unser Team in der zweiten Hälfte durch eine überragende Abwehrleistung absetzen. Besonders hervorzuheben ist unser Torhüter, der drei Siebenmeter parierte. Am Ende stand ein klares 28:24 auf der Anzeigetafel. Vielen Dank an alle Fans für die lautstarke Unterstützung!')">
-                    <div>
-                        <div class="news-date">29. MÄR 2026</div>
-                        <h4>Heimsieg der A-Jugend!</h4>
-                        <p>Ein spannendes Spiel in der Viethalle endet mit einem verdienten Sieg für unsere Jungs...</p>
-                    </div>
-                    <button class="read-more-btn">Mehr lesen</button>
-                </div>
-                
-                <div class="news-card" onclick="openNews('Neue Trikots für die Minis', '25. MÄR 2026', 'Dank unseres neuen Sponsors erstrahlen die kleinsten Talente nun in neuem Glanz.\n\nDie offizielle Übergabe fand am Mittwoch in der Halle statt. Die Kinder haben sich riesig über das neue Design gefreut und konnten es kaum erwarten, die ersten Tore in den neuen Trikots zu werfen.')">
-                    <div>
-                        <div class="news-date">25. MÄR 2026</div>
-                        <h4>Neue Trikots für die Minis</h4>
-                        <p>Dank unseres Sponsors erstrahlen die kleinsten Talente nun in neuem Glanz...</p>
-                    </div>
-                    <button class="read-more-btn">Mehr lesen</button>
-                </div>
-
-                <div class="news-card" onclick="openNews('Trainingslager Sommer', '20. MÄR 2026', 'Die Anmeldung für das Sommer-Camp ist ab sofort für alle Jugendmannschaften geöffnet.\n\nVom 03. bis 07. August dreht sich alles um den Ball. Technik, Taktik und vor allem viel Spaß stehen auf dem Programm. Meldet euch schnell an, die Plätze sind begrenzt!')">
-                    <div>
-                        <div class="news-date">20. MÄR 2026</div>
-                        <h4>Trainingslager Sommer</h4>
-                        <p>Die Anmeldung für das Sommer-Camp ist ab sofort für alle Jugendmannschaften geöffnet...</p>
-                    </div>
-                    <button class="read-more-btn">Mehr lesen</button>
-                </div>
-            </div>
+            <div class="news-header"><h3>Neueste News</h3></div>
+            <div id="home-news-container" class="news-slider"></div>
         </section>
     </div>
 
     <div id="page-news-page" class="section">
-        <div class="content-card">
-            <h2>Alle News</h2>
-            <p style="color: var(--text-secondary);">Hier findest du alle aktuellen Spielberichte und Neuigkeiten.</p>
-            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-            <p>Die neuesten Berichte findest du aktuell direkt auf unserer Startseite!</p>
+        <div class="news-section">
+            <div class="news-header"><h2>Alle News</h2></div>
+            <div id="full-news-container" class="news-grid"></div>
         </div>
     </div>
 
     <div id="page-about" class="section">
-        <div class="content-card">
+        <div class="clean-content">
             <h2>Über uns</h2>
-            <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px;">Die SG BBM Bietigheim steht für Leidenschaft, Teamgeist und Spitzenhandball in der Region. Als starke Gemeinschaft aus Bietigheim, Bissingen und Metterzimmern fördern wir Talente von den kleinsten Minis bis hin zu unseren erfolgreichen Aktiven-Mannschaften.</p>
-            <p style="font-size: 18px; line-height: 1.6;">Unsere Mission ist es, die Faszination des Handballsports jeden Tag erlebbar zu machen – sowohl durch sportliche Exzellenz auf dem Feld als auch durch ein starkes Miteinander abseits des Spielfelds.</p>
+            <p>Die SG BBM Bietigheim steht für Leidenschaft, Teamgeist und Spitzenhandball in der Region. Als starke Gemeinschaft aus Bietigheim, Bissingen und Metterzimmern fördern wir Talente von den kleinsten Minis bis hin zu unseren erfolgreichen Aktiven-Mannschaften.</p>
+            <p>Unsere Mission ist es, die Faszination des Handballsports jeden Tag erlebbar zu machen – sowohl durch sportliche Exzellenz auf dem Feld als auch durch ein starkes Miteinander abseits des Spielfelds.</p>
         </div>
     </div>
 
     <div id="page-contact" class="section">
-        <div class="content-card">
+        <div class="clean-content">
             <h2>Kontakt</h2>
-            <p style="font-size: 20px; line-height: 1.8;">
-                <strong>SG BBM Bietigheim Geschäftsstelle</strong><br>
-                Schwarzwaldstraße 27<br>
-                74321 Bietigheim<br><br>
-                <i class="fa-solid fa-phone"></i> +49 7142 919780
-            </p>
+            <p><strong>SG BBM Bietigheim Geschäftsstelle</strong><br>
+            Schwarzwaldstraße 27<br>
+            74321 Bietigheim</p>
+            <p><i class="fa-solid fa-phone"></i> +49 7142 919780</p>
         </div>
     </div>
 
     <div id="page-team" class="section">
         <div class="team-content">
-            <h1 id="team-title" style="font-size: 48px;">Team</h1>
-            <p id="team-sub" style="margin-bottom: 20px; font-size: 24px; color: var(--text-secondary);">Saison 2026/27</p>
-            <div class="team-img-placeholder">
-                <img src="" id="team-img">
-                <i class="fa-solid fa-users" id="team-icon" style="font-size: 80px; color: #d2d2d7; padding: 40px;"></i>
+            <h1 id="team-title" style="font-size: 48px; margin-bottom:10px;">Team</h1>
+            <p id="team-sub" style="margin-bottom: 25px; font-size: 20px; color: var(--text-secondary);">Saison 2026/27</p>
+            
+            <div style="width:100%; border-radius:24px; overflow:hidden; margin-bottom:30px; background:#f5f5f7; display:flex; align-items:center; justify-content:center; min-height:300px;">
+                <img src="" id="team-img" style="width:100%; display:none;">
+                <i class="fa-solid fa-users" id="team-icon" style="font-size:80px; color:#d2d2d7;"></i>
             </div>
+
             <div class="widget-box">
-                <h3 style="margin-bottom: 20px;">Tabelle</h3>
+                <h3 style="margin-bottom:15px;">Aktuelle Tabelle</h3>
                 <div id="handball-tabelle"></div>
+            </div>
+
+            <div class="widget-box">
+                <h3 style="margin-bottom:15px;">Spielplan</h3>
+                <div id="handball-spielplan"></div>
             </div>
         </div>
     </div>
 </main>
 
+<footer>
+    <div class="footer-container">
+        Copyright © 2026 SGBBM Bietigheim GbR. Alle Rechte vorbehalten.
+    </div>
+</footer>
+
 <script>
-    // NEWS MODAL LOGIK
-    function openNews(title, date, text) {
-        document.getElementById('modal-title').innerText = title;
-        document.getElementById('modal-date').innerText = date;
-        document.getElementById('modal-text').innerText = text;
+    // NEWS DATENBANK
+    const newsData = [
+        { title: "Heimsieg der A-Jugend!", date: "29. MÄR 2026", preview: "Ein spannendes Spiel in der Viethalle endet mit einem verdienten Sieg...", full: "Hier steht der gesamte Spielbericht der A-Jugend..." },
+        { title: "Neue Trikots für die Minis", date: "25. MÄR 2026", preview: "Dank unseres Sponsors erstrahlen die kleinsten Talente nun in neuem Glanz...", full: "Die Minis freuen sich sehr über die neue Ausstattung!" },
+        { title: "Trainingslager Sommer", date: "20. MÄR 2026", preview: "Die Anmeldung für das Sommer-Camp ist ab sofort geöffnet...", full: "Alle Infos zum Camp findet ihr hier..." },
+        { title: "Frauen 1 rücken vor", date: "15. MÄR 2026", preview: "Nach einer starken Auswärtsserie klettert unser Team weiter...", full: "Glückwunsch an unsere Damen!" }
+    ];
+
+    function renderNews() {
+        const homeCont = document.getElementById('home-news-container');
+        const fullCont = document.getElementById('full-news-container');
+        homeCont.innerHTML = newsData.slice(0,3).map(n => createCard(n)).join('');
+        fullCont.innerHTML = newsData.map(n => createCard(n)).join('');
+    }
+
+    function createCard(n) {
+        return `
+            <div class="news-card" onclick="openNews('${n.title}', '${n.date}', '${n.full}')">
+                <div>
+                    <div class="news-date">${n.date}</div>
+                    <h4>${n.title}</h4>
+                    <p>${n.preview}</p>
+                </div>
+                <div style="font-size:13px; font-weight:600; color:var(--apple-blue); margin-top:10px;">Mehr lesen</div>
+            </div>
+        `;
+    }
+
+    function openNews(t, d, txt) {
+        document.getElementById('modal-title').innerText = t;
+        document.getElementById('modal-date').innerText = d;
+        document.getElementById('modal-text').innerText = txt;
         document.getElementById('newsModal').style.display = "block";
-        document.body.style.overflow = "hidden"; // Scrollen verhindern
     }
 
-    function closeNews() {
-        document.getElementById('newsModal').style.display = "none";
-        document.body.style.overflow = "auto";
-    }
+    function closeNews() { document.getElementById('newsModal').style.display = "none"; }
 
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('newsModal')) closeNews();
-    }
-
-    // NAVIGATION LOGIK
     function toggleMobileMenu() {
-        const menu = document.getElementById('main-nav-menu');
+        document.getElementById('main-nav-menu').classList.toggle('active');
         const icon = document.getElementById('menu-icon');
-        menu.classList.toggle('active');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-xmark');
-        
-        if(!menu.classList.contains('active')) {
-            document.getElementById('teams-mega-menu').classList.remove('mobile-open');
-            document.getElementById('team-chevron').classList.remove('rotated');
-        }
+        icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-xmark');
     }
 
-    function toggleTeamsDropdown(event) {
+    function toggleTeamsDropdown(e) {
         if(window.innerWidth <= 768) {
-            event.stopPropagation();
-            const mega = document.getElementById('teams-mega-menu');
-            const chevron = document.getElementById('team-chevron');
-            mega.classList.toggle('mobile-open');
-            chevron.classList.toggle('rotated');
+            e.stopPropagation();
+            document.getElementById('teams-mega-menu').classList.toggle('mobile-open');
+            document.getElementById('team-chevron').classList.toggle('rotated');
         }
     }
 
-    function closeAndShow(pageId) {
-        if(window.innerWidth <= 768 && document.getElementById('main-nav-menu').classList.contains('active')) toggleMobileMenu();
-        showPage(pageId);
-    }
-
-    function closeAndShowTeam(kat, name) {
-        if(window.innerWidth <= 768 && document.getElementById('main-nav-menu').classList.contains('active')) toggleMobileMenu();
-        showTeam(kat, name);
-    }
-
-    function showPage(pageId) {
+    function showPage(p) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById('page-' + pageId).classList.add('active');
-        window.scrollTo(0, 0);
+        document.getElementById('page-' + p).classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    function closeAndShow(p) {
+        if(window.innerWidth <= 768) toggleMobileMenu();
+        showPage(p);
+    }
+
+    function closeAndShowTeam(k, n) {
+        if(window.innerWidth <= 768) toggleMobileMenu();
+        showTeam(k, n);
     }
 
     function showTeam(kat, name) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         let title = (kat === 'Herren' || kat === 'Frauen') ? kat + " " + name : kat + " " + name + "-Jugend";
-        
-        let teamImgPath = "";
-        if(kat === 'männlich' && name === 'A') {
-            teamImgPath = "ajugendteamfoto.jpg";
-        } else if(kat === 'männlich') {
-            teamImgPath = "mj" + name.toLowerCase() + ".jpg";
-        } else if(kat === 'weiblich') {
-            teamImgPath = "wj" + name.toLowerCase() + ".jpg";
-        } else {
-            teamImgPath = kat.toLowerCase() + name + ".jpg";
-        }
-
         document.getElementById('team-title').innerText = title;
+        
         const img = document.getElementById('team-img');
         const icon = document.getElementById('team-icon');
+        
+        // Bildpfad-Logik
+        let path = (kat === 'männlich' && name === 'A') ? "ajugendteamfoto.jpg" : "team_placeholder.jpg";
+        img.src = path; img.style.display = 'block'; icon.style.display = 'none';
+        img.onerror = () => { img.style.display='none'; icon.style.display='block'; };
 
-        img.src = teamImgPath;
-        img.style.display = 'block';
-        icon.style.display = 'none';
+        const tab = document.getElementById('handball-tabelle');
+        const plan = document.getElementById('handball-spielplan');
+        tab.innerHTML = ""; plan.innerHTML = "";
 
-        img.onerror = function() {
-            this.style.display = 'none';
-            icon.style.display = 'block';
-        };
-
-        const container = document.getElementById('handball-tabelle');
-        container.innerHTML = "";
         if (kat === 'männlich' && name === 'A') {
             _hb({ widget: 'tabelle', teamId: 'sportradar.dhbdata.2607-1672', container: 'handball-tabelle' });
+            _hb({ widget: 'spielplan', teamId: 'sportradar.dhbdata.2607-1672', container: 'handball-spielplan' });
         } else {
-            container.innerHTML = "<p style='padding:40px; color:#86868b;'>Tabelle für " + title + " noch nicht verknüpft.</p>";
+            tab.innerHTML = "<p>Tabelle folgt.</p>";
+            plan.innerHTML = "<p>Spielplan folgt.</p>";
         }
 
         document.getElementById('page-team').classList.add('active');
-        window.scrollTo(0, 0);
+        window.scrollTo(0,0);
     }
-</script>
 
+    window.onload = renderNews;
+    window.onclick = (e) => { if(e.target == document.getElementById('newsModal')) closeNews(); };
+</script>
 </body>
 </html>
 
