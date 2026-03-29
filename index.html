@@ -48,34 +48,34 @@
             padding: 0 22px;
         }
 
-        /* NEUES LOGO IN DER NAV */
         .logo-wrapper {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px; /* Erhöhter Abstand zwischen Logo und Text */
             cursor: pointer;
             z-index: 2001;
         }
         .nav-logo-img {
-            width: 24px;
-            height: 24px;
+            width: 28px; /* Leicht vergrößert für bessere Sichtbarkeit */
+            height: 28px;
             border-radius: 4px;
-            object-fit: cover;
+            object-fit: contain;
         }
         .logo-text { 
             font-weight: 700; 
             font-size: 1.1rem; 
-            color: var(--apple-blue); 
+            color: var(--apple-blue);
+            white-space: nowrap;
         }
 
         .nav-menu { display: flex; gap: 25px; list-style: none; align-items: center; }
         .nav-link { font-size: 13px; font-weight: 400; color: var(--text-main); cursor: pointer; text-decoration: none; }
         .nav-link:hover { color: var(--apple-red); }
 
-        .mobile-menu-toggle { display: none; font-size: 20px; cursor: pointer; z-index: 2001; }
+        .mobile-menu-toggle { display: none; font-size: 20px; cursor: pointer; z-index: 2001; color: var(--text-main); }
 
+        /* --- MEGA MENU --- */
         .nav-item-teams { position: relative; height: 52px; display: flex; align-items: center; }
-        
         .mega-menu {
             position: absolute; top: 52px; left: 50%; transform: translateX(-50%);
             width: 90vw; max-width: 1000px; background: white; border-radius: 0 0 24px 24px;
@@ -87,6 +87,16 @@
         .mega-col h4 { font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 15px; font-weight: 600; }
         .mega-col a { display: block; font-size: 14px; padding: 7px 0; text-decoration: none; color: var(--text-main); cursor: pointer; }
         .mega-col a:hover { color: var(--apple-red); }
+
+        /* --- SECTIONS --- */
+        main { flex: 1; padding-top: 100px; } /* Mehr Abstand nach oben gegen Überlappung */
+        .section { display: none; width: 100%; }
+        .section.active { display: block; animation: appleFade 0.5s ease; }
+
+        .hero { text-align: center; padding: 40px 20px; }
+        .logo-box { width: 180px; height: 180px; margin: 0 auto 20px; }
+        .logo-box img { width: 100%; height: 100%; object-fit: contain; }
+        .hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
 
         /* --- NEWS --- */
         .news-section { margin-top: 40px; padding: 0 20px; width: 100%; max-width: 1050px; margin-left: auto; margin-right: auto; }
@@ -102,60 +112,32 @@
             justify-content: space-between; min-height: 240px; cursor: pointer;
         }
         .news-card:hover { transform: translateY(-5px); background: #f0f0f2; }
-        .news-card h4 { font-size: 19px; margin-bottom: 10px; line-height: 1.2; }
-        .news-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
-        .news-date { font-size: 12px; font-weight: 700; color: var(--apple-red); text-transform: uppercase; margin-bottom: 8px; }
 
-        /* --- MODAL --- */
-        .modal {
-            display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
-        }
-        .modal-content {
-            background-color: #fff; margin: 5% auto; padding: 40px; border-radius: 30px;
-            max-width: 700px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative;
-        }
-        .close-modal { position: absolute; right: 25px; top: 20px; font-size: 28px; cursor: pointer; color: var(--text-secondary); }
-
-        /* --- MOBILE STYLES --- */
+        /* --- MOBILE OPTIMIERUNG --- */
         @media (max-width: 768px) {
+            nav { height: 60px; }
+            .nav-container { padding: 0 15px; }
+            .mobile-menu-toggle { display: block; }
             .nav-menu {
                 position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-                background: white; flex-direction: column; padding-top: 80px;
+                background: white; flex-direction: column; padding-top: 100px;
                 transform: translateY(-100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                overflow-y: auto; align-items: center;
+                overflow-y: auto; align-items: center; gap: 35px;
             }
             .nav-menu.active { transform: translateY(0); }
-            .mobile-menu-toggle { display: block; }
-            .mega-menu { position: static; transform: none; width: 100%; display: none; padding: 10px; text-align: center; border: none; box-shadow: none; }
-            .mega-menu.mobile-open { display: block; }
-            .nav-item-teams { flex-direction: column; height: auto; width: 100%; }
-            .news-card { flex: 0 0 280px; scroll-snap-align: center; }
+            .nav-link { font-size: 18px; font-weight: 500; }
+            .hero h1 { font-size: 28px; }
+            .logo-wrapper { gap: 10px; }
+            .nav-logo-img { width: 32px; height: 32px; }
         }
 
-        /* --- SECTIONS --- */
-        main { flex: 1; padding-top: 80px; }
-        .section { display: none; width: 100%; }
-        .section.active { display: block; animation: appleFade 0.5s ease; }
-        
-        .clean-content { max-width: 800px; margin: 0 auto; padding: 0 20px 60px; text-align: left; }
-        .clean-content h2 { font-size: 48px; margin-bottom: 30px; letter-spacing: -0.03em; font-weight: 800; }
-        .clean-content p { font-size: 21px; line-height: 1.6; color: var(--text-main); margin-bottom: 25px; font-weight: 400; }
-
-        .hero { text-align: center; padding: 20px 20px; }
-        .logo-box { width: 160px; height: 160px; margin: 0 auto 20px; }
-        .logo-box img { width: 100%; border-radius: 12px; }
-
-        .team-content { max-width: 1000px; margin: 0 auto; padding: 20px; }
-        .widget-box { background: var(--card-bg); border-radius: 20px; padding: 20px; margin-bottom: 30px; overflow-x: auto; }
-        .player-names { font-size: 15px; line-height: 1.7; color: var(--text-main); margin-bottom: 25px; padding: 0 5px; }
-
+        /* --- FOOTER --- */
         footer {
-            padding: 40px 20px; max-width: 1000px; margin: 0 auto; width: 100%;
+            padding: 40px 20px; max-width: 1000px; margin: 40px auto 0; width: 100%;
             border-top: 1px solid var(--border-subtle); color: var(--text-secondary); font-size: 12px;
         }
 
-        @keyframes appleFade { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes appleFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 
     <script>
@@ -174,14 +156,12 @@
         <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
             <i class="fa-solid fa-bars" id="menu-icon"></i>
         </div>
+
         <ul class="nav-menu" id="main-nav-menu">
             <li><span class="nav-link" onclick="closeAndShow('home')">Home</span></li>
             <li><span class="nav-link" onclick="closeAndShow('news-page')">News</span></li>
             <li class="nav-item-teams">
-                <div class="team-toggle-wrapper" onclick="toggleTeamsDropdown(event)" style="display:flex; align-items:center; cursor:pointer;">
-                    <span class="nav-link">Teams</span>
-                    <i class="fa-solid fa-chevron-down team-toggle-icon" id="team-chevron" style="font-size:10px; margin-left:5px;"></i>
-                </div>
+                <span class="nav-link" onclick="toggleTeamsDropdown(event)">Teams <i class="fa-solid fa-chevron-down" style="font-size:10px; margin-left:5px;"></i></span>
                 <div class="mega-menu" id="teams-mega-menu">
                     <div class="mega-container">
                         <div class="mega-col">
@@ -189,30 +169,16 @@
                             <a onclick="closeAndShowTeam('männlich', 'A')">A-Jugend</a>
                             <a onclick="closeAndShowTeam('männlich', 'B')">B-Jugend</a>
                             <a onclick="closeAndShowTeam('männlich', 'C')">C-Jugend</a>
-                            <a onclick="closeAndShowTeam('männlich', 'D')">D-Jugend</a>
-                            <a onclick="closeAndShowTeam('männlich', 'E')">E-Jugend</a>
-                            <a onclick="closeAndShowTeam('männlich', 'F')">F-Jugend</a>
                         </div>
                         <div class="mega-col">
                             <h4>Jugend Weiblich</h4>
                             <a onclick="closeAndShowTeam('weiblich', 'A')">A-Jugend</a>
                             <a onclick="closeAndShowTeam('weiblich', 'B')">B-Jugend</a>
-                            <a onclick="closeAndShowTeam('weiblich', 'C')">C-Jugend</a>
-                            <a onclick="closeAndShowTeam('weiblich', 'D')">D-Jugend</a>
-                            <a onclick="closeAndShowTeam('weiblich', 'E')">E-Jugend</a>
-                            <a onclick="closeAndShowTeam('weiblich', 'F')">F-Jugend</a>
                         </div>
                         <div class="mega-col">
                             <h4>Aktive</h4>
                             <a onclick="closeAndShowTeam('Herren', '2')">Herren 2</a>
-                            <a onclick="closeAndShowTeam('Herren', '3')">Herren 3</a>
-                            <a onclick="closeAndShowTeam('Herren', '4')">Herren 4</a>
-                            <a onclick="closeAndShowTeam('Herren', '5')">Herren 5</a>
-                            <hr style="margin: 10px 0; border: 0; border-top: 1px solid #eee;">
                             <a onclick="closeAndShowTeam('Frauen', '1')">Frauen 1</a>
-                            <a onclick="closeAndShowTeam('Frauen', '2')">Frauen 2</a>
-                            <a onclick="closeAndShowTeam('Frauen', '3')">Frauen 3</a>
-                            <a onclick="closeAndShowTeam('Frauen', '4')">Frauen 4</a>
                         </div>
                     </div>
                 </div>
@@ -224,29 +190,19 @@
 </nav>
 
 <main>
-    <div id="newsModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeNews()">&times;</span>
-            <div id="modal-body-content">
-                <div class="news-date" id="modal-date"></div>
-                <h2 id="modal-title" style="margin-bottom:20px;"></h2>
-                <div id="modal-text" style="line-height:1.8; white-space:pre-line;"></div>
-            </div>
-        </div>
-    </div>
-
     <div id="page-home" class="section active">
         <section class="hero">
             <div class="logo-box">
-                <img src="SG_BBM_Bietigheim_Logo.jpg" alt="Logo">
+                <img src="SG_BBM_Bietigheim_Logo.jpg" alt="Zentrales Logo">
             </div>
             <h1>SG BBM GbR</h1>
-            <p style="color: var(--text-secondary); font-size: 24px;">Leidenschaft. Exzellenz. Handball.</p>
+            <p style="color: var(--text-secondary); font-size: 20px;">Leidenschaft. Exzellenz. Handball.</p>
         </section>
 
         <section class="news-section">
             <div class="news-header"><h3>Neueste News</h3></div>
-            <div id="home-news-container" class="news-slider"></div>
+            <div id="home-news-container" class="news-slider">
+                </div>
         </section>
     </div>
 
@@ -258,52 +214,10 @@
     </div>
 
     <div id="page-about" class="section">
-        <div class="clean-content">
-            <h2>Über uns</h2>
-            <p>Die SG BBM Bietigheim steht für Leidenschaft, Teamgeist und Spitzenhandball in der Region. Als starke Gemeinschaft aus Bietigheim, Bissingen und Metterzimmern fördern wir Talente von den kleinsten Minis bis hin zu unseren erfolgreichen Aktiven-Mannschaften.</p>
-            <p>Unsere Mission ist es, die Faszination des Handballsports jeden Tag erlebbar zu machen – sowohl durch sportliche Exzellenz auf dem Feld als auch durch ein starkes Miteinander abseits des Spielfelds.</p>
-        </div>
+        <div class="hero"><h2>Über uns</h2><p>Inhalt folgt...</p></div>
     </div>
-
     <div id="page-contact" class="section">
-        <div class="clean-content">
-            <h2>Kontakt</h2>
-            <p><strong>SG BBM Bietigheim Geschäftsstelle</strong><br>
-            Schwarzwaldstraße 27<br>
-            74321 Bietigheim</p>
-            <p><i class="fa-solid fa-phone"></i> +49 7142 919780</p>
-        </div>
-    </div>
-
-    <div id="page-team" class="section">
-        <div class="team-content">
-            <h1 id="team-title" style="font-size: 48px; margin-bottom:10px;">Team</h1>
-            <p id="team-sub" style="margin-bottom: 25px; font-size: 20px; color: var(--text-secondary);">Saison 2026/27</p>
-            
-            <div style="width:100%; border-radius:24px; overflow:hidden; margin-bottom:15px; background:#f5f5f7; display:flex; align-items:center; justify-content:center; min-height:300px;">
-                <img src="" id="team-img" style="width:100%; display:none;">
-                <i class="fa-solid fa-users" id="team-icon" style="font-size:80px; color:#d2d2d7;"></i>
-            </div>
-            
-            <div id="team-player-names-container" style="display: none;">
-                <p class="player-names">
-                    <strong>vlnr unten:</strong> Lennic Schrembs, Bennet Rith, Paul König, Aaron Schnicke, Leon Schwarz, Ivan Poriadin, Leandros Hild, Hugo Jeannel, Oskar Zoller
-                </p>
-                <p class="player-names" style="margin-bottom:30px;">
-                    <strong>vlnr hintere Reihe:</strong> Lara jung, Mattis Bartsch, Tim Bross, Niklas Baur, Maximilian Zoller, Manuel Schmidt, Bennet Haag, Luis Hasselt, David Pils, Quirin Oßwald, Hans-Ulrich Kämpf
-                </p>
-            </div>
-
-            <div class="widget-box">
-                <h3 style="margin-bottom:15px;">Aktuelle Tabelle</h3>
-                <div id="handball-tabelle"></div>
-            </div>
-
-            <div class="widget-box">
-                <h3 style="margin-bottom:15px;">Spielplan</h3>
-                <div id="handball-spielplan"></div>
-            </div>
-        </div>
+        <div class="hero"><h2>Kontakt</h2><p>Inhalt folgt...</p></div>
     </div>
 </main>
 
@@ -314,56 +228,11 @@
 </footer>
 
 <script>
-    const newsData = [
-        { title: "Heimsieg der A-Jugend!", date: "29. MÄR 2026", preview: "Ein spannendes Spiel in der Viethalle endet mit einem verdienten Sieg...", full: "Hier steht der gesamte Spielbericht der A-Jugend..." },
-        { title: "Neue Trikots für die Minis", date: "25. MÄR 2026", preview: "Dank unseres Sponsors erstrahlen die kleinsten Talente nun in neuem Glanz...", full: "Die Minis freuen sich sehr über die neue Ausstattung!" },
-        { title: "Trainingslager Sommer", date: "20. MÄR 2026", preview: "Die Anmeldung für das Sommer-Camp ist ab sofort geöffnet...", full: "Alle Infos zum Camp findet ihr hier..." },
-        { title: "Frauen 1 rücken vor", date: "15. MÄR 2026", preview: "Nach einer starken Auswärtsserie klettert unser Team weiter...", full: "Glückwunsch an unsere Damen!" }
-    ];
-
-    function renderNews() {
-        const homeCont = document.getElementById('home-news-container');
-        const fullCont = document.getElementById('full-news-container');
-        if(homeCont && fullCont) {
-            homeCont.innerHTML = newsData.slice(0,3).map(n => createCard(n)).join('');
-            fullCont.innerHTML = newsData.map(n => createCard(n)).join('');
-        }
-    }
-
-    function createCard(n) {
-        return `
-            <div class="news-card" onclick="openNews('${n.title}', '${n.date}', '${n.full}')">
-                <div>
-                    <div class="news-date">${n.date}</div>
-                    <h4>${n.title}</h4>
-                    <p>${n.preview}</p>
-                </div>
-                <div style="font-size:13px; font-weight:600; color:var(--apple-blue); margin-top:10px;">Mehr lesen</div>
-            </div>
-        `;
-    }
-
-    function openNews(t, d, txt) {
-        document.getElementById('modal-title').innerText = t;
-        document.getElementById('modal-date').innerText = d;
-        document.getElementById('modal-text').innerText = txt;
-        document.getElementById('newsModal').style.display = "block";
-    }
-
-    function closeNews() { document.getElementById('newsModal').style.display = "none"; }
-
+    // Navigation Logik
     function toggleMobileMenu() {
         document.getElementById('main-nav-menu').classList.toggle('active');
         const icon = document.getElementById('menu-icon');
         icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-xmark');
-    }
-
-    function toggleTeamsDropdown(e) {
-        if(window.innerWidth <= 768) {
-            e.stopPropagation();
-            document.getElementById('teams-mega-menu').classList.toggle('mobile-open');
-            document.getElementById('team-chevron').classList.toggle('rotated');
-        }
     }
 
     function showPage(p) {
@@ -377,49 +246,29 @@
         showPage(p);
     }
 
-    function closeAndShowTeam(k, n) {
-        if(window.innerWidth <= 768) toggleMobileMenu();
-        showTeam(k, n);
-    }
+    // News Automatisierung
+    const newsData = [
+        { title: "Heimsieg der A-Jugend!", date: "29. MÄR 2026", preview: "Ein spannendes Spiel..." },
+        { title: "Neue Trikots für die Minis", date: "25. MÄR 2026", preview: "Dank unseres Sponsors..." },
+        { title: "Trainingslager Sommer", date: "20. MÄR 2026", preview: "Die Anmeldung ist offen..." }
+    ];
 
-    function showTeam(kat, name) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        let title = (kat === 'Herren' || kat === 'Frauen') ? kat + " " + name : kat + " " + name + "-Jugend";
-        document.getElementById('team-title').innerText = title;
-        
-        const img = document.getElementById('team-img');
-        const icon = document.getElementById('team-icon');
-        const namesCont = document.getElementById('team-player-names-container');
-        
-        let path = "team_placeholder.jpg";
-        namesCont.style.display = 'none';
-
-        if (kat === 'männlich' && name === 'A') {
-            path = "ajugendteamfoto.jpg";
-            namesCont.style.display = 'block';
+    function renderNews() {
+        const homeCont = document.getElementById('home-news-container');
+        if(homeCont) {
+            homeCont.innerHTML = newsData.map(n => `
+                <div class="news-card">
+                    <div>
+                        <div class="news-date">${n.date}</div>
+                        <h4>${n.title}</h4>
+                        <p>${n.preview}</p>
+                    </div>
+                </div>
+            `).join('');
         }
-        
-        img.src = path; img.style.display = 'block'; icon.style.display = 'none';
-        img.onerror = () => { img.style.display='none'; icon.style.display='block'; };
-
-        const tab = document.getElementById('handball-tabelle');
-        const plan = document.getElementById('handball-spielplan');
-        tab.innerHTML = ""; plan.innerHTML = "";
-
-        if (kat === 'männlich' && name === 'A') {
-            _hb({ widget: 'tabelle', teamId: 'sportradar.dhbdata.2607-1672', container: 'handball-tabelle' });
-            _hb({ widget: 'spielplan', teamId: 'sportradar.dhbdata.2607-1672', container: 'handball-spielplan' });
-        } else {
-            tab.innerHTML = "<p style='color:#86868b; padding:20px;'>Tabelle folgt.</p>";
-            plan.innerHTML = "<p style='color:#86868b; padding:20px;'>Spielplan folgt.</p>";
-        }
-
-        document.getElementById('page-team').classList.add('active');
-        window.scrollTo(0,0);
     }
 
     window.onload = renderNews;
-    window.onclick = (e) => { if(e.target == document.getElementById('newsModal')) closeNews(); };
 </script>
 </body>
 </html>
