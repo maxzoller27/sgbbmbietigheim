@@ -48,7 +48,25 @@
             padding: 0 22px;
         }
 
-        .logo-text { font-weight: 700; font-size: 1.1rem; cursor: pointer; color: var(--apple-blue); z-index: 2001; }
+        /* NEUES LOGO IN DER NAV */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 2001;
+        }
+        .nav-logo-img {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+        .logo-text { 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            color: var(--apple-blue); 
+        }
 
         .nav-menu { display: flex; gap: 25px; list-style: none; align-items: center; }
         .nav-link { font-size: 13px; font-weight: 400; color: var(--text-main); cursor: pointer; text-decoration: none; }
@@ -58,7 +76,6 @@
 
         .nav-item-teams { position: relative; height: 52px; display: flex; align-items: center; }
         
-        /* MEGA MENU */
         .mega-menu {
             position: absolute; top: 52px; left: 50%; transform: translateX(-50%);
             width: 90vw; max-width: 1000px; background: white; border-radius: 0 0 24px 24px;
@@ -71,30 +88,18 @@
         .mega-col a { display: block; font-size: 14px; padding: 7px 0; text-decoration: none; color: var(--text-main); cursor: pointer; }
         .mega-col a:hover { color: var(--apple-red); }
 
-        /* --- NEWS SLIDER & GRID --- */
+        /* --- NEWS --- */
         .news-section { margin-top: 40px; padding: 0 20px; width: 100%; max-width: 1050px; margin-left: auto; margin-right: auto; }
         .news-header { padding: 0 10px; margin-bottom: 20px; }
         .news-header h3 { font-size: 28px; font-weight: 700; }
-        
-        .news-slider, .news-grid {
-            display: flex; gap: 20px; padding: 10px;
-        }
+        .news-slider, .news-grid { display: flex; gap: 20px; padding: 10px; }
         .news-slider { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
         .news-slider::-webkit-scrollbar { display: none; }
         .news-grid { flex-wrap: wrap; justify-content: flex-start; }
-
         .news-card {
-            flex: 0 0 320px;
-            background: var(--card-bg);
-            border-radius: 22px;
-            padding: 25px;
-            scroll-snap-align: start;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 240px;
-            cursor: pointer;
+            flex: 0 0 320px; background: var(--card-bg); border-radius: 22px; padding: 25px;
+            scroll-snap-align: start; transition: all 0.3s ease; display: flex; flex-direction: column;
+            justify-content: space-between; min-height: 240px; cursor: pointer;
         }
         .news-card:hover { transform: translateY(-5px); background: #f0f0f2; }
         .news-card h4 { font-size: 19px; margin-bottom: 10px; line-height: 1.2; }
@@ -129,8 +134,8 @@
         }
 
         /* --- SECTIONS --- */
-        main { flex: 1; }
-        .section { display: none; padding-top: 100px; min-height: 80vh; width: 100%; }
+        main { flex: 1; padding-top: 80px; }
+        .section { display: none; width: 100%; }
         .section.active { display: block; animation: appleFade 0.5s ease; }
         
         .clean-content { max-width: 800px; margin: 0 auto; padding: 0 20px 60px; text-align: left; }
@@ -143,17 +148,11 @@
 
         .team-content { max-width: 1000px; margin: 0 auto; padding: 20px; }
         .widget-box { background: var(--card-bg); border-radius: 20px; padding: 20px; margin-bottom: 30px; overflow-x: auto; }
+        .player-names { font-size: 15px; line-height: 1.7; color: var(--text-main); margin-bottom: 25px; padding: 0 5px; }
 
-        /* --- FOOTER / COPYRIGHT --- */
         footer {
-            padding: 40px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-            width: 100%;
-            border-top: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-            font-size: 12px;
-            text-align: left;
+            padding: 40px 20px; max-width: 1000px; margin: 0 auto; width: 100%;
+            border-top: 1px solid var(--border-subtle); color: var(--text-secondary); font-size: 12px;
         }
 
         @keyframes appleFade { from { opacity: 0; } to { opacity: 1; } }
@@ -167,7 +166,11 @@
 
 <nav>
     <div class="nav-container">
-        <div class="logo-text" onclick="showPage('home')">SG BBM</div>
+        <div class="logo-wrapper" onclick="showPage('home')">
+            <img src="SG_BBM_Bietigheim_Logo.jpg" alt="Logo" class="nav-logo-img">
+            <div class="logo-text">SG BBM</div>
+        </div>
+        
         <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
             <i class="fa-solid fa-bars" id="menu-icon"></i>
         </div>
@@ -277,9 +280,18 @@
             <h1 id="team-title" style="font-size: 48px; margin-bottom:10px;">Team</h1>
             <p id="team-sub" style="margin-bottom: 25px; font-size: 20px; color: var(--text-secondary);">Saison 2026/27</p>
             
-            <div style="width:100%; border-radius:24px; overflow:hidden; margin-bottom:30px; background:#f5f5f7; display:flex; align-items:center; justify-content:center; min-height:300px;">
+            <div style="width:100%; border-radius:24px; overflow:hidden; margin-bottom:15px; background:#f5f5f7; display:flex; align-items:center; justify-content:center; min-height:300px;">
                 <img src="" id="team-img" style="width:100%; display:none;">
                 <i class="fa-solid fa-users" id="team-icon" style="font-size:80px; color:#d2d2d7;"></i>
+            </div>
+            
+            <div id="team-player-names-container" style="display: none;">
+                <p class="player-names">
+                    <strong>vlnr unten:</strong> Lennic Schrembs, Bennet Rith, Paul König, Aaron Schnicke, Leon Schwarz, Ivan Poriadin, Leandros Hild, Hugo Jeannel, Oskar Zoller
+                </p>
+                <p class="player-names" style="margin-bottom:30px;">
+                    <strong>vlnr hintere Reihe:</strong> Lara jung, Mattis Bartsch, Tim Bross, Niklas Baur, Maximilian Zoller, Manuel Schmidt, Bennet Haag, Luis Hasselt, David Pils, Quirin Oßwald, Hans-Ulrich Kämpf
+                </p>
             </div>
 
             <div class="widget-box">
@@ -297,12 +309,11 @@
 
 <footer>
     <div class="footer-container">
-        Copyright © 2026 SGBBM Bietigheim GbR. Alle Rechte vorbehalten.
+        Copyright © 2026 SG BBM Bietigheim GbR. Alle Rechte vorbehalten.
     </div>
 </footer>
 
 <script>
-    // NEWS DATENBANK
     const newsData = [
         { title: "Heimsieg der A-Jugend!", date: "29. MÄR 2026", preview: "Ein spannendes Spiel in der Viethalle endet mit einem verdienten Sieg...", full: "Hier steht der gesamte Spielbericht der A-Jugend..." },
         { title: "Neue Trikots für die Minis", date: "25. MÄR 2026", preview: "Dank unseres Sponsors erstrahlen die kleinsten Talente nun in neuem Glanz...", full: "Die Minis freuen sich sehr über die neue Ausstattung!" },
@@ -313,8 +324,10 @@
     function renderNews() {
         const homeCont = document.getElementById('home-news-container');
         const fullCont = document.getElementById('full-news-container');
-        homeCont.innerHTML = newsData.slice(0,3).map(n => createCard(n)).join('');
-        fullCont.innerHTML = newsData.map(n => createCard(n)).join('');
+        if(homeCont && fullCont) {
+            homeCont.innerHTML = newsData.slice(0,3).map(n => createCard(n)).join('');
+            fullCont.innerHTML = newsData.map(n => createCard(n)).join('');
+        }
     }
 
     function createCard(n) {
@@ -376,9 +389,16 @@
         
         const img = document.getElementById('team-img');
         const icon = document.getElementById('team-icon');
+        const namesCont = document.getElementById('team-player-names-container');
         
-        // Bildpfad-Logik
-        let path = (kat === 'männlich' && name === 'A') ? "ajugendteamfoto.jpg" : "team_placeholder.jpg";
+        let path = "team_placeholder.jpg";
+        namesCont.style.display = 'none';
+
+        if (kat === 'männlich' && name === 'A') {
+            path = "ajugendteamfoto.jpg";
+            namesCont.style.display = 'block';
+        }
+        
         img.src = path; img.style.display = 'block'; icon.style.display = 'none';
         img.onerror = () => { img.style.display='none'; icon.style.display='block'; };
 
@@ -390,8 +410,8 @@
             _hb({ widget: 'tabelle', teamId: 'sportradar.dhbdata.2607-1672', container: 'handball-tabelle' });
             _hb({ widget: 'spielplan', teamId: 'sportradar.dhbdata.2607-1672', container: 'handball-spielplan' });
         } else {
-            tab.innerHTML = "<p>Tabelle folgt.</p>";
-            plan.innerHTML = "<p>Spielplan folgt.</p>";
+            tab.innerHTML = "<p style='color:#86868b; padding:20px;'>Tabelle folgt.</p>";
+            plan.innerHTML = "<p style='color:#86868b; padding:20px;'>Spielplan folgt.</p>";
         }
 
         document.getElementById('page-team').classList.add('active');
@@ -403,4 +423,3 @@
 </script>
 </body>
 </html>
-
